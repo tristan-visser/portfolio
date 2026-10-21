@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/Icon.astro';
+import Logo from '@/components/Logo.astro';
 import { site } from '@/config';
 
 const path = Astro.url.pathname;
@@ -13,12 +14,7 @@ function isActive(href: string): boolean {
 <header class="border-rule border-b print:hidden">
   <div class="page-width flex items-center justify-between gap-6 py-4">
     <a href="/" class="group flex items-center gap-3">
-      <span
-        class="bg-ink text-paper grid size-8 place-items-center font-serif text-lg leading-none"
-        aria-hidden="true"
-      >
-        TV
-      </span>
+      <Logo size={32} class="shrink-0" />
       <span class="font-mono text-label uppercase">{site.name}</span>
     </a>
 
