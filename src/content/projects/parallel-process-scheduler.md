@@ -12,6 +12,7 @@ stack:
 status: completed
 featured: false
 order: 7
+draft: true
 ---
 
 ## The problem
