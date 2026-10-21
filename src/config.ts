@@ -57,15 +57,10 @@ export const skills = [
   },
   {
     label: 'Systems and tools',
-    items: [
-      'C/OpenMP',
-      'Multi-threading',
-      'UDP/TCP',
-      'Linux/Bash',
-      'Git',
-      'CI/CD',
-      'Cloudflare',
-      'Vercel',
-    ],
+    items: ['C/OpenMP', 'Multi-threading', 'UDP/TCP', 'Linux/Bash', 'Git', 'Cloudflare', 'Vercel'],
+  },
+  {
+    label: 'Ways of working',
+    items: ['Agile / Scrum', 'Semantic versioning', 'CI/CD', 'Requirements gathering'],
   },
 ] as const;
