@@ -49,7 +49,16 @@ export const skills = [
   },
   {
     label: 'Backend and data',
-    items: ['PostgreSQL', 'Supabase', 'REST APIs', 'Node.js', 'Express.js'],
+    items: [
+      'Spring Boot',
+      'Node.js',
+      'Express',
+      'Prisma',
+      'PostgreSQL',
+      'Supabase',
+      'REST APIs',
+      'WebSockets',
+    ],
   },
   {
     label: 'Frontend',
@@ -57,7 +66,17 @@ export const skills = [
   },
   {
     label: 'Systems and tools',
-    items: ['C/OpenMP', 'Multi-threading', 'UDP/TCP', 'Linux/Bash', 'Git', 'Cloudflare', 'Vercel'],
+    items: [
+      'C/OpenMP',
+      'Multi-threading',
+      'UDP/TCP',
+      'JavaFX',
+      'Linux/Bash',
+      'Git',
+      'Docker',
+      'Cloudflare',
+      'Vercel',
+    ],
   },
   {
     label: 'Ways of working',

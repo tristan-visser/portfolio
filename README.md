@@ -2,7 +2,7 @@
 
 Personal portfolio for **Tristan Visser**, a final-year BSc Computer Science student at Stellenbosch University. The site is built to be fast, accessible and easy to extend with real project case studies.
 
-**Status:** working preview. Real case studies from the CV are in place; links, screenshots and final copy are still being added.
+**Status:** working preview. Real case studies from coursework and industry work are in place; links, screenshots and final copy are still being added.
 
 ## Stack
 
@@ -109,8 +109,8 @@ At launch:
 
 ## What still needs to happen
 
-- Add a live URL or repository URL for each of the four case studies.
-- Add real screenshots or diagrams for the projects.
+- Add a live URL or repository URL for each of the five case studies.
+- Add screenshots or diagrams for the remaining projects.
 - Confirm the project years and any outcomes that are not already on the CV.
 - The public CV PDF is generated from `/cv/` with `pnpm cv:pdf`; the original FlowCV PDF stays local because it contains a phone number.
 - Add a professional photo if wanted; the site works without one.

@@ -37,8 +37,10 @@ export function personSchema(): JsonLd {
       'C',
       'PostgreSQL',
       'REST APIs',
+      'Spring Boot',
       'React',
       'Node.js',
+      'Prisma',
       'Cloudflare',
     ],
     alumniOf: {

@@ -1,7 +1,8 @@
 ---
-title: P2P Encrypted File Sharing
-summary: A peer-to-peer file-sharing desktop app with a custom reliable UDP protocol, TCP signalling and end-to-end encryption.
-role: Solo developer · Computer Networks
+title: P2P File Sharing & RBUDP
+summary: A peer-to-peer file-sharing application with hybrid RSA/AES encryption, and a custom reliable UDP protocol benchmarked against TCP.
+role: RBUDP, GUI and experiments · team of four
+team: Team of four
 timeline: Coursework
 year: 2026
 stack:
@@ -9,35 +10,43 @@ stack:
   - JavaFX
   - UDP
   - TCP
-  - End-to-end encryption
+  - RSA / AES
+  - Tailscale
 status: completed
 featured: true
-order: 2
+order: 3
 ---
 
 ## The problem
 
-Moving a file between two peers sounds trivial until the network is unreliable. The project was to build a peer-to-peer file-sharing application that could transfer files directly between machines, keep the contents private, and stay reliable without falling back to a central server.
+Moving a file between two peers sounds trivial until the network is unreliable. This project covered two related problems: a transfer protocol that could move a file quickly without giving up reliability, and a peer-to-peer file-sharing application where clients find each other through a server but transfer the file directly.
+
+Both were team projects in CS313 Computer Networks. The work covered the RBUDP transfer layer, the JavaFX clients, the encrypted peer protocol, and the experiments used to compare the design against TCP.
 
 ## What I built
 
-A JavaFX desktop application with peer discovery, socket lifecycle handling, and end-to-end encryption. The transfer layer uses a custom RBUDP protocol: UDP data blasts for throughput, with TCP signalling for reliable selective retransmission.
+For the RBUDP transfer application, I worked on the sender and receiver, file chunking with 32-bit sequence numbers, blast-based transmission, selective retransmission of missing packets, out-of-order and duplicate handling, MD5 integrity checks, and the JavaFX progress interface. I also worked on the experiments that compared throughput, packet size and packet loss behaviour against TCP.
 
-I also built the benchmark used to compare the protocol against the alternatives, so the design decisions were measured rather than assumed.
+For the peer-to-peer file-sharing application, I worked on the backend and the report. The server registers clients and brokers introductions but never stores file lists or sees file contents. Search results are aggregated through the server, while downloads happen over a direct peer-to-peer TCP connection.
+
+The security model uses hybrid RSA + AES encryption: a per-download AES message key is encrypted with the uploader's RSA public key, forwarded by the server without being readable, and then used to encrypt the file chunks. The server is an introduction service, not a trusted party that can read the data.
 
 ## The hard part
 
-Reliability over UDP without giving up the reason for using UDP in the first place. The protocol had to handle lost packets, out-of-order delivery, peer disconnects and the boundary between signalling and data transfer. Getting selective retransmission right meant being precise about what had actually been received, not just what had been sent.
+Reliability over UDP without giving up the reason for using UDP. The protocol has to handle lost packets, out-of-order delivery, duplicates and peer disconnects, and selective retransmission only works if the receiver is precise about what it actually has.
+
+The peer-to-peer side has a different hard part: making the server useful without making it powerful. It has to introduce peers and route searches, but it should not know who has which files or be able to read a transfer. That constraint shapes the protocol, the encryption and the trust model.
 
 ## Decisions
 
 - **UDP for data, TCP for signalling.** The data path benefits from UDP; the control path benefits from TCP's ordering and reliability.
-- **Selective retransmission.** Resending the whole file after a loss would have thrown away the throughput advantage.
-- **Encryption at the application layer.** Peers should not have to trust the network to keep the file private.
+- **Selective retransmission.** Resending the whole file after a loss would throw away the throughput advantage.
+- **Hybrid RSA + AES.** RSA exchanges the per-download key; AES encrypts the file chunks. The server forwards the encrypted key without being able to read it.
+- **Measure the design.** The project included experiments for TCP vs RBUDP throughput, transfer rate, packet size and packet-loss behaviour, rather than relying on intuition.
 
 ## Outcome
 
-The project produced a working peer-to-peer file transfer application and a benchmark of the RBUDP protocol against the alternatives.
+The project delivered a working RBUDP file-transfer application and a peer-to-peer file-sharing application, built by a team of four. The experiments compared the protocol against TCP and documented how packet size and loss affect the result.
 
 ## What I'd do differently
 

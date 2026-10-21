@@ -24,6 +24,8 @@ const projects = defineCollection({
         .object({
           src: image(),
           alt: z.string().min(1),
+          caption: z.string().max(200).optional(),
+          narrow: z.boolean().default(false),
         })
         .optional(),
       placeholder: z.boolean().default(false),

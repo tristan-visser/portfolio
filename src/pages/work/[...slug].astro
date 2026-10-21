@@ -111,7 +111,8 @@ const meta = [
           <Figure
             src={project.data.cover.src}
             alt={project.data.cover.alt}
-            caption={`${project.data.title} — ${project.data.year}`}
+            caption={project.data.cover.caption ?? `${project.data.title} — ${project.data.year}`}
+            class={project.data.cover.narrow ? 'mx-auto max-w-[460px]' : ''}
             priority
           />
         )}

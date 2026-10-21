@@ -1,7 +1,7 @@
 ---
 title: Parallel Process Scheduler
 summary: A multi-threaded CPU scheduler in C and OpenMP with IPC mailboxes, graph-based cycle detection and deadlock prevention.
-role: Solo developer · Operating Systems
+role: Coursework project
 timeline: Coursework
 year: 2026
 stack:
@@ -11,7 +11,7 @@ stack:
   - Multi-threading
 status: completed
 featured: false
-order: 4
+order: 5
 ---
 
 ## The problem

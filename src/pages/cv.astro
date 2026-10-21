@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site, skills, socialLinks } from '@/config';
-import { getPublishedProjects, projectPath } from '@/lib/projects';
+import { getFeaturedProjects, projectPath } from '@/lib/projects';
 import { absoluteUrl, pageTitle, personSchema } from '@/lib/seo';
 
-const projects = await getPublishedProjects();
+const projects = await getFeaturedProjects(3);
 const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric' }).format(
   new Date(),
 );
@@ -65,9 +65,9 @@ const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric
         <p class="text-ink-soft mt-3 text-small leading-relaxed">
           Final-year Computer Science student at Stellenbosch University with a strong foundation in
           backend architectures, relational database design, REST APIs and Agile workflows. I've
-          built a graph-based dependency engine with Electrum engineers, a reliable UDP
-          file-transfer protocol, and database-backed web applications for commercial clients.
-          Looking for a graduate software engineering role from 2027.
+          built a graph-based dependency engine with Electrum engineers, a full-stack hackathon
+          platform, a reliable UDP file-transfer protocol, and database-backed web applications for
+          commercial clients. Looking for a graduate software engineering role from 2027.
         </p>
       </section>
 
