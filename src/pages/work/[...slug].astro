@@ -9,6 +9,7 @@ import Prose from '@/components/Prose.astro';
 import SectionLabel from '@/components/SectionLabel.astro';
 import StatusBadge from '@/components/StatusBadge.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config';
 import { getPublishedProjects, projectPath } from '@/lib/projects';
 import {
   absoluteUrl,
@@ -167,7 +168,14 @@ const meta = [
               </li>
             )}
             {!project.data.liveUrl && !project.data.repoUrl && (
-              <li class="text-muted">Links are being added.</li>
+              <li>
+                <a
+                  class="link-inline"
+                  href={`mailto:${site.email}?subject=${encodeURIComponent(`Source request: ${project.data.title}`)}`}
+                >
+                  Source available on request
+                </a>
+              </li>
             )}
           </ul>
         </div>
