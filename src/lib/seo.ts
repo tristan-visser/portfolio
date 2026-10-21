@@ -35,6 +35,7 @@ export function personSchema(): JsonLd {
       'JavaScript',
       'SQL',
       'C',
+      'Lua',
       'PostgreSQL',
       'REST APIs',
       'Spring Boot',

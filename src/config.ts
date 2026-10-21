@@ -45,7 +45,7 @@ export const socialLinks = [
 export const skills = [
   {
     label: 'Languages',
-    items: ['Java', 'Python', 'JavaScript', 'SQL', 'C'],
+    items: ['Java', 'Python', 'JavaScript', 'SQL', 'C', 'Lua'],
   },
   {
     label: 'Backend and data',
@@ -68,6 +68,7 @@ export const skills = [
     label: 'Systems and tools',
     items: [
       'C/OpenMP',
+      'MPI',
       'Multi-threading',
       'UDP/TCP',
       'JavaFX',

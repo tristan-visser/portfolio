@@ -109,7 +109,7 @@ At launch:
 
 ## What still needs to happen
 
-- Add a live URL or repository URL for each of the five case studies.
+- Add a live URL or repository URL for each of the seven case studies.
 - Add screenshots or diagrams for the remaining projects.
 - Confirm the project years and any outcomes that are not already on the CV.
 - The public CV PDF is generated from `/cv/` with `pnpm cv:pdf`; the original FlowCV PDF stays local because it contains a phone number.

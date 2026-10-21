@@ -13,7 +13,7 @@ stack:
   - pytest
 status: completed
 featured: false
-order: 4
+order: 5
 cover:
   src: ./images/bpe-compact.svg
   alt: Compact delayed-input deterministic finite automaton for a BPE tokenizer, with numbered states and token transitions.
