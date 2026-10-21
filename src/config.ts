@@ -4,6 +4,7 @@ export const site = {
   description:
     'Final-year BSc Computer Science student at Stellenbosch University. I build backend systems, relational databases and full-stack web applications. Open to graduate software engineering roles from 2027.',
   url: 'https://tristanvisser.co.za',
+  repoUrl: 'https://github.com/tristan-visser/portfolio',
   locale: 'en-ZA',
   lang: 'en-ZA',
   email: 'hello@tristanvisser.co.za',

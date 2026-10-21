@@ -67,7 +67,18 @@ const year = new Date().getFullYear();
       <p>
         © {year} {site.name}. All rights reserved.
       </p>
-      <p>Built with Astro. Deployed on Cloudflare. No tracking cookies.</p>
+      <p>
+        Built with Astro. Deployed on Cloudflare.{' '}
+        <a
+          class="transition-colors hover:text-accent"
+          href={site.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Source
+        </a>
+        . No tracking cookies.
+      </p>
     </div>
   </div>
 </footer>
