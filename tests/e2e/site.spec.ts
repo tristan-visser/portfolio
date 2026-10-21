@@ -58,6 +58,13 @@ test('unknown routes return the custom 404 page', async ({ page }) => {
   await expect(page.getByText('Error 404 · Not found')).toBeVisible();
 });
 
+test('CV PDF is available', async ({ request }) => {
+  const response = await request.get('/tristan-visser-cv.pdf');
+
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toContain('application/pdf');
+});
+
 test('privacy page is available from the footer', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Privacy' }).click();
