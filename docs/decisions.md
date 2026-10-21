@@ -56,13 +56,13 @@
 
 **Alternatives rejected:** Trusting a checklist, removing the placeholder pages before launch (loses the layout reference).
 
-## ADR-008: Workers Builds for deployment, GitHub Actions for quality
+## ADR-008: GitHub Actions for quality and deployment
 
-**Decision:** Connect the GitHub repository to Cloudflare Workers Builds for production deploys on `main`. Use GitHub Actions for formatting, linting, type checking, unit tests, build, Playwright/axe and Lighthouse.
+**Decision:** Use GitHub Actions for formatting, linting, type checking, unit tests, build, Playwright/axe, Lighthouse and production deployment. The deploy job runs only on `main`, after the quality job passes, using a scoped Cloudflare token stored in repository secrets. The token can only edit Workers scripts and routes.
 
-**Why:** Workers Builds keeps the deploy credential inside Cloudflare and gives preview deployments per branch. GitHub Actions is the right place for quality gates and test reports. The two responsibilities stay separate.
+**Why:** It keeps CI and deployment in one place, gives test and Lighthouse reports next to the code, and is fully automatable with the account token available. The deploy token is narrowly scoped and only lives in GitHub's secret store. Workers Builds is a good alternative, but it requires a one-time dashboard connection and a user-scoped API token, which is more setup for a one-person project.
 
-**Alternatives rejected:** Deploying from GitHub Actions with a long-lived Cloudflare token (more secret surface), deploying manually (easy to forget).
+**Alternatives rejected:** Workers Builds (excellent, but needs a user-scoped token and dashboard connection), deploying from a laptop (easy to forget and not reproducible), a broad account token in GitHub secrets (unnecessary blast radius).
 
 ## ADR-009: Light theme only for v1
 
