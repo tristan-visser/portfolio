@@ -77,10 +77,17 @@ export const skills = [
       'Docker',
       'Cloudflare',
       'Vercel',
+      'JVM',
     ],
   },
   {
     label: 'Ways of working',
-    items: ['Agile / Scrum', 'Semantic versioning', 'CI/CD', 'Requirements gathering'],
+    items: [
+      'Agile / Scrum',
+      'Semantic versioning',
+      'CI/CD',
+      'Requirements gathering',
+      'Compiler design',
+    ],
   },
 ] as const;

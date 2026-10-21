@@ -17,6 +17,14 @@ stack:
 status: completed
 featured: true
 order: 2
+cover:
+  src: ./images/hackathon-code-editor.png
+  alt: Hackathon platform code editor showing a Python submission, a file explorer, and the problem statement.
+  caption: The collaborative editor — problem statement, virtual file system and Python submission in one view.
+gallery:
+  - src: ./images/hackathon-leaderboard.png
+    alt: Hackathon platform leaderboard showing a live event timer, team members, problem tabs and ranked teams by tests passed and runtime.
+    caption: The live leaderboard — tests passed, runtime and team rankings.
 ---
 
 ## The problem

@@ -28,6 +28,15 @@ const projects = defineCollection({
           narrow: z.boolean().default(false),
         })
         .optional(),
+      gallery: z
+        .array(
+          z.object({
+            src: image(),
+            alt: z.string().min(1),
+            caption: z.string().max(200).optional(),
+          }),
+        )
+        .default([]),
       placeholder: z.boolean().default(false),
       draft: z.boolean().default(false),
     }),
