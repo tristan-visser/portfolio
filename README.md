@@ -72,10 +72,11 @@ This is intentional. It is too easy to forget that demo content is still on a po
 | `pnpm test`          | Vitest unit tests                               |
 | `pnpm test:e2e`      | Playwright desktop and mobile tests             |
 | `pnpm lighthouse`    | Lighthouse CI against the local preview         |
+| `pnpm cv:pdf`        | Regenerate the public CV PDF from `/cv/`        |
 | `pnpm cf:types`      | Regenerate `worker-configuration.d.ts`          |
 | `pnpm deploy`        | Deploy the Worker with Wrangler                 |
 
-Rebuild and restart `pnpm preview` after changing the Worker or the headers.
+Rebuild and restart `pnpm preview` after changing the Worker or the headers. The CV PDF is generated from the running preview, so run `pnpm preview` before `pnpm cv:pdf`.
 
 ## Cloudflare setup
 
@@ -111,7 +112,7 @@ At launch:
 - Add a live URL or repository URL for each of the four case studies.
 - Add real screenshots or diagrams for the projects.
 - Confirm the project years and any outcomes that are not already on the CV.
-- Decide whether to publish the existing CV PDF (it contains a phone number) or generate a sanitised PDF from `/cv/`.
+- The public CV PDF is generated from `/cv/` with `pnpm cv:pdf`; the original FlowCV PDF stays local because it contains a phone number.
 - Add a professional photo if wanted; the site works without one.
 - Connect the custom domain, set up Workers Builds, and remove the preview hostname from Turnstile/`ALLOWED_ORIGIN`.
 - Run the final cross-browser and real-device pass.

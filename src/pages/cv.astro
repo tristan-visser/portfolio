@@ -21,13 +21,22 @@ const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric
       <a class="label hover:text-accent-dark" href="/">
         ← Back home
       </a>
-      <button
-        type="button"
-        data-print-cv
-        class="border-ink hover:bg-ink hover:text-paper inline-flex min-h-11 items-center gap-2 border px-4 font-mono text-label uppercase transition-colors"
-      >
-        Print / Save as PDF
-      </button>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="/tristan-visser-cv.pdf"
+          download
+          class="bg-ink text-paper hover:bg-accent-dark inline-flex min-h-11 items-center gap-2 px-4 font-mono text-label uppercase transition-colors"
+        >
+          Download PDF
+        </a>
+        <button
+          type="button"
+          data-print-cv
+          class="border-ink hover:bg-ink hover:text-paper inline-flex min-h-11 items-center gap-2 border px-4 font-mono text-label uppercase transition-colors"
+        >
+          Print / Save as PDF
+        </button>
+      </div>
     </div>
 
     <article class="cv mx-auto max-w-[820px]">
