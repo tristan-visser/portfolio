@@ -1,0 +1,26 @@
+---
+interface Decision {
+  decision: string;
+  alternative?: string;
+  reason: string;
+}
+
+interface Props {
+  items: Decision[];
+}
+
+const { items } = Astro.props;
+---
+
+<dl class="border-rule my-10 border-t" aria-label="Decision log">
+  {items.map((item) => (
+    <div class="border-rule grid gap-2 border-b py-5 sm:grid-cols-[1fr_1.15fr] sm:gap-8">
+      <dt>
+        <span class="label">Decision</span>
+        <p class="mt-1 font-medium">{item.decision}</p>
+        {item.alternative && <p class="text-muted mt-1 text-small">Rejected: {item.alternative}</p>}
+      </dt>
+      <dd class="text-ink-soft text-small leading-relaxed">{item.reason}</dd>
+    </div>
+  ))}
+</dl>

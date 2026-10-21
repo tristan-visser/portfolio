@@ -1,0 +1,19 @@
+---
+interface Props {
+  index?: string;
+  label: string;
+  class?: string;
+}
+
+const { index, label, class: className = '' } = Astro.props;
+---
+
+<p class:list={['label flex flex-wrap items-center gap-x-2 gap-y-1', className]}>
+  {index && <span class="text-accent">{index}</span>}
+  {index && (
+    <span aria-hidden="true" class="text-rule-strong">
+      /
+    </span>
+  )}
+  <span>{label}</span>
+</p>

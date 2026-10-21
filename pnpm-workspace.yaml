@@ -1,0 +1,14 @@
+allowBuilds:
+  workerd: true
+  esbuild: true
+  sharp: true
+  '@tailwindcss/oxide': true
+minimumReleaseAgeExclude:
+  - '@astrojs/markdown-satteri@0.4.5'
+  - '@astrojs/prism@4.1.1'
+  - '@astrojs/telemetry@3.4.1'
+  - astro@7.4.2
+  - '@astrojs/cloudflare@14.4.2'
+  - '@astrojs/mdx@8.1.1'
+  - '@astrojs/check@0.9.12'
+  - '@astrojs/language-server@2.17.3'

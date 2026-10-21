@@ -1,0 +1,11 @@
+dist
+node_modules
+.astro
+.wrangler
+design-samples
+screenshots
+.lighthouseci
+playwright-report
+test-results
+pnpm-lock.yaml
+worker-configuration.d.ts

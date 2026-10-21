@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tristanvisser.co.za/sitemap-index.xml

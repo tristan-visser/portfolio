@@ -1,0 +1,97 @@
+---
+import ArrowLink from '@/components/ArrowLink.astro';
+import ContactForm from '@/components/ContactForm.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import SectionLabel from '@/components/SectionLabel.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site, socialLinks } from '@/config';
+import { absoluteUrl, contactPageSchema, pageTitle, personSchema, websiteSchema } from '@/lib/seo';
+
+const schema = [personSchema(), websiteSchema(), contactPageSchema()];
+const turnstileEnabled = Boolean(site.turnstileSiteKey);
+---
+
+<BaseLayout
+  title={pageTitle('Contact')}
+  description="Contact Tristan Visser about graduate software engineering roles, projects or collaboration."
+  canonical={absoluteUrl('/contact/')}
+  {schema}
+>
+  {turnstileEnabled && (
+    <script
+      is:inline
+      slot="head"
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
+  )}
+
+  <PageHeader
+    eyebrow="Contact"
+    title="Let's talk."
+    intro="I'm looking for a graduate software engineering role from 2027. If you're hiring, or you just want to compare notes on a project, email is the fastest way to reach me."
+  />
+
+  <section class="py-section">
+    <div class="page-width grid gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(260px,0.65fr)] lg:gap-16">
+      <div>
+        <SectionLabel label="Send a message" />
+        <div class="mt-4">
+          <ContactForm />
+        </div>
+        <p class="text-muted mt-4 max-w-[60ch] text-[11px] leading-relaxed">
+          This form is protected by Cloudflare Turnstile. Your name, email and message are used only
+          to reply to you. Read the{' '}
+          <a class="link-inline" href="/privacy/">
+            privacy notice
+          </a>
+          .
+        </p>
+      </div>
+
+      <aside>
+        <div class="border-rule border-t">
+          <div class="border-rule border-b py-4">
+            <p class="label">Open to</p>
+            <ul class="mt-2 space-y-1.5 text-small">
+              <li>Graduate software engineering roles</li>
+              <li>Backend, full-stack or platform teams</li>
+              <li>Stellenbosch, Cape Town or remote</li>
+              <li>Starting in 2027</li>
+            </ul>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Email</p>
+            <a class="link-inline mt-2 inline-block text-small" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Response time</p>
+            <p class="mt-1 text-small">Usually within one working day.</p>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Elsewhere</p>
+            <div class="mt-2 flex flex-col gap-2 text-small">
+              {socialLinks.map((link) => (
+                <a
+                  class="link-inline inline-flex items-center gap-1.5"
+                  href={link.href}
+                  target={link.icon === 'mail' ? undefined : '_blank'}
+                  rel={link.icon === 'mail' ? undefined : 'me noopener'}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <ArrowLink href="/cv/" label="View CV" />
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>

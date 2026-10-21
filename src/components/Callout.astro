@@ -1,0 +1,20 @@
+---
+interface Props {
+  type?: 'note' | 'warning';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+---
+
+<aside
+  class:list={[
+    'my-8 border-l-2 px-5 py-4',
+    type === 'warning' ? 'border-accent bg-accent-soft/40' : 'border-ink-soft bg-paper-deep/50',
+  ]}
+>
+  {title && <p class="label mb-2">{title}</p>}
+  <div class="text-ink-soft text-small leading-relaxed [&>p:last-child]:mb-0">
+    <slot />
+  </div>
+</aside>

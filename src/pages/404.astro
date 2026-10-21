@@ -1,0 +1,30 @@
+---
+import ArrowLink from '@/components/ArrowLink.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { absoluteUrl, pageTitle } from '@/lib/seo';
+---
+
+<BaseLayout
+  title={pageTitle('Page not found')}
+  description="That page does not exist. Head back to the work or the home page."
+  canonical={absoluteUrl('/404/')}
+  noindex
+>
+  <section class="relative isolate overflow-hidden border-b border-rule">
+    <div class="hero-grid-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="page-width py-20 md:py-28">
+      <p class="label text-accent-dark">Error 404 · Not found</p>
+      <p class="mt-8 font-serif text-[clamp(6rem,18vw,14rem)] leading-none tracking-[-0.06em]">
+        404
+      </p>
+      <h1 class="text-ink-soft mt-6 max-w-[22ch] font-serif text-display-md font-normal">
+        This page doesn't exist. It may have moved, or it may never have been here.
+      </h1>
+      <div class="mt-8 flex flex-wrap gap-x-6 gap-y-3">
+        <ArrowLink href="/" label="Back home" />
+        <ArrowLink href="/work/" label="See the work" />
+        <ArrowLink href="/contact/" label="Get in touch" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

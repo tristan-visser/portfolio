@@ -1,0 +1,223 @@
+---
+import ArrowLink from '@/components/ArrowLink.astro';
+import ButtonLink from '@/components/ButtonLink.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import SectionLabel from '@/components/SectionLabel.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site, skills } from '@/config';
+import { absoluteUrl, pageTitle, personSchema, profilePageSchema, websiteSchema } from '@/lib/seo';
+
+const schema = [personSchema(), websiteSchema(), profilePageSchema()];
+---
+
+<BaseLayout
+  title={pageTitle('About')}
+  description="About Tristan Visser, a final-year BSc Computer Science student at Stellenbosch University, and how he approaches software engineering."
+  canonical={absoluteUrl('/about/')}
+  {schema}
+>
+  <PageHeader
+    eyebrow="About"
+    title="A computer science student who likes the unglamorous parts."
+    intro="I build backend systems and full-stack products. I care about the parts that make them reliable: the data model, the error states, the test that catches the thing you were sure would never happen."
+  />
+
+  <section class="py-section">
+    <div class="page-width grid gap-12 md:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.65fr)] md:gap-16">
+      <div>
+        <p class="max-w-[20ch] font-serif text-display-md font-normal">
+          Good software is mostly <em class="text-accent">clarity</em>, not cleverness.
+        </p>
+        <div class="text-ink-soft mt-7 max-w-[62ch] space-y-4 text-body leading-relaxed">
+          <p>
+            I'm in my final year of a BSc in Computer Science at Stellenbosch University. I've built
+            a graph-based dependency engine with Electrum engineers, designed a reliable UDP
+            protocol for encrypted peer-to-peer file sharing, and deployed database-backed web
+            applications for commercial clients.
+          </p>
+          <p>
+            I've worked across Java, Python, JavaScript, SQL and C. I like small teams, clear
+            writing, and code review that makes the next person's day easier.
+          </p>
+          <p>
+            I'm looking for a graduate software engineering role from 2027, ideally on a team that
+            ships real software to real users and expects juniors to grow quickly.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <SectionLabel label="How I work" />
+          <div class="border-rule mt-4 grid gap-0 border-t sm:grid-cols-3">
+            <div class="border-rule border-b py-5 sm:border-r sm:border-b-0 sm:pr-5">
+              <p class="font-serif text-xl">Understand the problem first.</p>
+              <p class="text-muted mt-2 text-small leading-relaxed">
+                The stack is the last decision, not the first. I'd rather ask two more questions
+                than build the wrong thing quickly.
+              </p>
+            </div>
+            <div class="border-rule border-b py-5 sm:border-r sm:border-b-0 sm:px-5">
+              <p class="font-serif text-xl">Make the edges boring.</p>
+              <p class="text-muted mt-2 text-small leading-relaxed">
+                Empty states, loading states, validation, and the error path. That's where most of
+                the user experience actually lives.
+              </p>
+            </div>
+            <div class="py-5 sm:pl-5">
+              <p class="font-serif text-xl">Write it down.</p>
+              <p class="text-muted mt-2 text-small leading-relaxed">
+                A short README, a clear commit message, a decision log. Future me is a different
+                person, and he will not remember why this exists.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="border-rule border-t">
+          <div class="border-rule border-b py-4">
+            <p class="label">Based in</p>
+            <p class="mt-1 text-small">{site.location}</p>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Education</p>
+            <p class="mt-1 text-small">
+              {site.degree}
+              <br />
+              {site.university}
+              <br />
+              2023 — {site.graduation}
+            </p>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Availability</p>
+            <p class="mt-1 text-small text-accent-dark">{site.availability}</p>
+          </div>
+          <div class="border-rule border-b py-4">
+            <p class="label">Elsewhere</p>
+            <div class="mt-2 flex flex-col gap-2 text-small">
+              <a class="link-inline" href={site.socials.github} target="_blank" rel="me noopener">
+                GitHub
+              </a>
+              <a class="link-inline" href={site.socials.linkedin} target="_blank" rel="me noopener">
+                LinkedIn
+              </a>
+              <a class="link-inline" href={`mailto:${site.email}`}>
+                Email
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 flex flex-col gap-3">
+          <ButtonLink href="/cv/" label="View CV" />
+          <ArrowLink href="/contact/" label="Get in touch" />
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="border-rule border-y py-section">
+    <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
+      <div>
+        <SectionLabel index="02" label="Experience" />
+        <p class="text-muted mt-4 max-w-[34ch] text-small leading-relaxed">
+          Client work, industry projects and the parts of the job that are not in the syllabus.
+        </p>
+      </div>
+      <div class="space-y-8">
+        <div class="border-rule border-t pt-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+            <div>
+              <p class="font-medium">Commercial Web Developer &amp; Technical Consultant</p>
+              <p class="text-muted text-small">Freelance · local business clients</p>
+            </div>
+            <p class="text-muted font-mono text-[11px] uppercase">Recent</p>
+          </div>
+          <ul class="text-ink-soft mt-3 max-w-[62ch] space-y-1.5 text-small leading-relaxed">
+            <li>
+              Designed, developed and deployed custom web applications backed by relational
+              databases and secure hosting.
+            </li>
+            <li>
+              Managed the full lifecycle: requirements gathering, domain and DNS configuration,
+              responsive UI, and ongoing maintenance.
+            </li>
+            <li>
+              Worked directly with local business owners to turn an operational problem into a
+              working product.
+            </li>
+          </ul>
+        </div>
+
+        <div class="border-rule border-t pt-4">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+            <div>
+              <p class="font-medium">Dependency Analysis Framework</p>
+              <p class="text-muted text-small">Electrum · industry project</p>
+            </div>
+            <p class="text-muted font-mono text-[11px] uppercase">2026</p>
+          </div>
+          <p class="text-ink-soft mt-3 max-w-[62ch] text-small leading-relaxed">
+            Built a Java dependency graph engine that identifies breaking API changes and opens
+            automated GitHub pull requests for affected repositories, across three Agile sprints
+            with Electrum engineers.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-rule bg-paper-deep/35 border-y py-section">
+    <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
+      <div>
+        <SectionLabel index="03" label="Skills" />
+        <p class="text-muted mt-4 max-w-[34ch] text-small leading-relaxed">
+          Tools I've used on real projects or coursework, not a list of everything I've installed
+          once.
+        </p>
+      </div>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {skills.map((group) => (
+          <div class="border-rule border-t pt-4">
+            <p class="label">{group.label}</p>
+            <ul class="mt-3 space-y-1.5 text-small">
+              {group.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-section">
+    <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
+      <div>
+        <SectionLabel index="04" label="Now" />
+        <p class="text-muted mt-4 max-w-[30ch] text-small leading-relaxed">
+          A snapshot, not a promise. Updated when things change.
+        </p>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        <div class="border-rule border-t pt-4">
+          <p class="label">Finishing</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">My BSc in Computer Science.</p>
+        </div>
+        <div class="border-rule border-t pt-4">
+          <p class="label">Looking for</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">
+            A graduate software engineering role from 2027.
+          </p>
+        </div>
+        <div class="border-rule border-t pt-4">
+          <p class="label">Building</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">
+            This portfolio, and the projects behind it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

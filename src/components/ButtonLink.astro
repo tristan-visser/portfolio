@@ -1,0 +1,29 @@
+---
+import Icon from '@/components/Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary';
+  external?: boolean;
+  class?: string;
+}
+
+const { href, label, variant = 'primary', external = false, class: className = '' } = Astro.props;
+---
+
+<a
+  {href}
+  class:list={[
+    'inline-flex min-h-11 items-center justify-center gap-2 px-4 font-mono text-label uppercase transition-colors duration-150',
+    variant === 'primary'
+      ? 'bg-ink text-paper hover:bg-accent-dark'
+      : 'border-ink text-ink hover:bg-ink hover:text-paper border',
+    className,
+  ]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  {label}
+  <Icon name={external ? 'arrow-up-right' : 'arrow-right'} size={14} />
+</a>

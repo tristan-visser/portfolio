@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+.astro/
+.output/
+.wrangler/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+!.dev.vars.example
+
+# Generated Cloudflare/Astro types are committed so CI can type-check.
+
+# Test output
+coverage/
+playwright-report/
+test-results/
+blob-report/
+
+# Editor and OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Local content intake (may contain private details)
+docs/content-intake.md
+
+# Local design samples and screenshots
+design-samples/
+screenshots/
+.lighthouseci/
+playwright-report/
+test-results/
+
+# Personal CV PDF (contains a phone number)
+tristan_visser_cv.pdf

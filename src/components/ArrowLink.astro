@@ -1,0 +1,31 @@
+---
+import Icon from '@/components/Icon.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  external?: boolean;
+  class?: string;
+}
+
+const { href, label, external = false, class: className = '' } = Astro.props;
+---
+
+<a
+  {href}
+  class:list={[
+    'group inline-flex min-h-11 items-center gap-2 font-mono text-label uppercase',
+    className,
+  ]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener noreferrer' : undefined}
+>
+  <span class="border-rule-strong group-hover:border-accent group-hover:text-accent-dark border-b pb-1 transition-colors">
+    {label}
+  </span>
+  <Icon
+    name={external ? 'arrow-up-right' : 'arrow-right'}
+    size={14}
+    class="transition-transform duration-200 group-hover:translate-x-0.5"
+  />
+</a>

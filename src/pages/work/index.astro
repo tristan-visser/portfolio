@@ -1,0 +1,74 @@
+---
+import ArrowLink from '@/components/ArrowLink.astro';
+import PageHeader from '@/components/PageHeader.astro';
+import ProjectRow from '@/components/ProjectRow.astro';
+import SectionLabel from '@/components/SectionLabel.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site } from '@/config';
+import { getPublishedProjects } from '@/lib/projects';
+import { absoluteUrl, breadcrumbSchema, pageTitle, personSchema, websiteSchema } from '@/lib/seo';
+
+const projects = await getPublishedProjects();
+
+const schema = [
+  personSchema(),
+  websiteSchema(),
+  breadcrumbSchema([{ name: 'Work', href: '/work/' }]),
+];
+---
+
+<BaseLayout
+  title={pageTitle('Work')}
+  description="Selected software projects by Tristan Visser, with the problem, the decisions and the trade-offs behind each one."
+  canonical={absoluteUrl('/work/')}
+  {schema}
+>
+  <PageHeader
+    eyebrow="Selected work"
+    title="Work."
+    intro="Case studies for the projects I've built, with the decisions and trade-offs that don't fit on a CV. Links to code or a live demo where available."
+  />
+
+  <section class="py-section">
+    <div class="page-width">
+      <div class="flex items-end justify-between gap-6">
+        <SectionLabel label={`${projects.length} projects`} />
+        <p class="text-muted hidden max-w-[30ch] text-right text-small sm:block">
+          Strongest first. More added as projects ship.
+        </p>
+      </div>
+
+      {projects.length > 0 ? (
+        <div class="border-rule mt-8 border-t">
+          <h2 class="sr-only">Projects</h2>
+          {projects.map((project, index) => (
+            <ProjectRow {project} {index} />
+          ))}
+        </div>
+      ) : (
+        <div class="border-rule mt-8 border-t py-10">
+          <p class="text-muted text-small">
+            Case studies are being written. In the meantime, email me at{' '}
+            <a class="link-inline" href={`mailto:${site.email}`}>
+              {site.email}
+            </a>{' '}
+            for the short version.
+          </p>
+        </div>
+      )}
+
+      <div class="mt-12 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p class="label">Looking for the short version?</p>
+          <p class="mt-2 max-w-[42ch] text-small text-muted">
+            My CV has the education, experience and skills in one page.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-x-6 gap-y-3">
+          <ArrowLink href="/cv/" label="View CV" />
+          <ArrowLink href="/contact/" label="Get in touch" />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

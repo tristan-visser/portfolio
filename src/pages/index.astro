@@ -1,0 +1,133 @@
+---
+import ArrowLink from '@/components/ArrowLink.astro';
+import ProjectRow from '@/components/ProjectRow.astro';
+import SectionLabel from '@/components/SectionLabel.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getFeaturedProjects } from '@/lib/projects';
+import { absoluteUrl, pageTitle, personSchema, websiteSchema } from '@/lib/seo';
+import { site } from '@/config';
+
+const projects = await getFeaturedProjects(3);
+
+const schema = [personSchema(), websiteSchema()];
+---
+
+<BaseLayout
+  title={pageTitle()}
+  description={site.description}
+  canonical={absoluteUrl('/')}
+  {schema}
+>
+  <section class="relative isolate overflow-hidden border-b border-rule">
+    <div class="hero-grid-bg pointer-events-none absolute inset-0 -z-10" aria-hidden="true"></div>
+    <div class="page-width pb-10 pt-12 md:pb-12 md:pt-16">
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(280px,0.55fr)] lg:items-end lg:gap-16">
+        <div>
+          <p class="label flex items-center gap-3">
+            <span class="bg-accent h-px w-9" aria-hidden="true"></span>
+            BSc Computer Science · {site.university} · {site.graduation}
+          </p>
+          <h1 class="mt-6 font-serif text-display-xl font-normal">
+            Tristan
+            <br />
+            <em class="text-accent">Visser</em>
+          </h1>
+        </div>
+
+        <div class="max-w-[36ch] lg:pb-2">
+          <p class="text-ink-soft text-lg leading-relaxed">
+            Final-year computer science student building backend systems and full-stack products. I
+            care about the parts users don't see: data models, error states, and making things fast.
+          </p>
+          <p class="mt-6 inline-flex items-start gap-2.5 font-mono text-label uppercase">
+            <span class="bg-accent mt-1.5 size-1.5 shrink-0 rounded-full" aria-hidden="true"></span>
+            {site.availability}
+          </p>
+          <div class="mt-7 flex flex-wrap gap-x-6 gap-y-2">
+            <ArrowLink href="#work" label="Selected work" />
+            <ArrowLink href="/about/" label="About me" />
+          </div>
+        </div>
+      </div>
+
+      <div class="border-rule mt-9 flex flex-wrap items-center justify-between gap-3 border-t pt-4 font-mono text-[10px] tracking-[0.05em] text-muted uppercase md:mt-12">
+        <span>{site.location} · 33.93° S, 18.86° E</span>
+        <span class="text-accent-dark">Backend · Full-stack · Java · Python</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-section" id="work">
+    <div class="page-width">
+      <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <div>
+          <SectionLabel index="01" label="Selected work" />
+          <h2 class="mt-4 max-w-[15ch] font-serif text-display-lg font-normal">
+            Things I've built and can explain.
+          </h2>
+        </div>
+        <p class="text-muted max-w-[30ch] text-small md:text-right">
+          Case studies with the problem, the decisions, and what I'd change next time.
+        </p>
+      </div>
+
+      <div class="border-rule mt-8 border-t">
+        {projects.map((project, index) => (
+          <ProjectRow {project} {index} />
+        ))}
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <ArrowLink href="/work/" label="All work" />
+      </div>
+    </div>
+  </section>
+
+  <section class="border-rule bg-paper-deep/35 border-y py-section">
+    <div class="page-width grid gap-10 md:grid-cols-[minmax(0,1.1fr)_minmax(260px,0.75fr)] md:gap-16">
+      <div>
+        <SectionLabel index="02" label="About" />
+        <p class="mt-5 max-w-[18ch] font-serif text-display-lg font-normal">
+          Good software is mostly <em class="text-accent">clarity</em>, not cleverness.
+        </p>
+      </div>
+      <div class="text-ink-soft space-y-4 text-base leading-relaxed">
+        <p>
+          I'm in my final year of a BSc in Computer Science at Stellenbosch University. I've built a
+          graph-based dependency engine with Electrum engineers, a reliable UDP protocol for
+          encrypted peer-to-peer file sharing, and database-backed web applications for commercial
+          clients.
+        </p>
+        <p>
+          I've worked across Java, Python, JavaScript, SQL and C. I like small teams, clear writing,
+          and code review that makes the next person's day easier.
+        </p>
+        <ArrowLink href="/about/" label="More about me" class="pt-2" />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-section">
+    <div class="page-width">
+      <SectionLabel index="03" label="Now" />
+      <div class="mt-6 grid gap-6 sm:grid-cols-3">
+        <div class="border-rule border-t pt-4">
+          <p class="label">Finishing</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">My BSc in Computer Science.</p>
+        </div>
+        <div class="border-rule border-t pt-4">
+          <p class="label">Looking for</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">
+            A graduate software engineering role from 2027.
+          </p>
+        </div>
+        <div class="border-rule border-t pt-4">
+          <p class="label">Building</p>
+          <p class="mt-2 font-serif text-2xl leading-snug">
+            This portfolio, and the projects behind it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

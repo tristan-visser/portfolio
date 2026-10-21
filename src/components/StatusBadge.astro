@@ -1,0 +1,28 @@
+---
+type Status = 'live' | 'in-progress' | 'completed' | 'archived';
+
+interface Props {
+  status: Status;
+}
+
+const { status } = Astro.props;
+
+const labels: Record<Status, string> = {
+  live: 'Live',
+  'in-progress': 'In progress',
+  completed: 'Completed',
+  archived: 'Archived',
+};
+
+const dot: Record<Status, string> = {
+  live: 'bg-accent',
+  'in-progress': 'bg-ink-soft',
+  completed: 'bg-muted',
+  archived: 'bg-muted',
+};
+---
+
+<span class="text-muted inline-flex items-center gap-1.5 font-mono text-[10px] tracking-[0.06em] uppercase">
+  <span class:list={['size-1.5 rounded-full', dot[status]]} aria-hidden="true"></span>
+  {labels[status]}
+</span>
