@@ -119,7 +119,7 @@ At launch:
 
 ## Quality bar
 
-- Lighthouse mobile: 95+ across performance, accessibility, best practices and SEO.
+- Lighthouse mobile: 95+ across performance, accessibility, best practices and SEO. The CI performance gate is 85 on shared runners to avoid flaky failures; accessibility, best practices and SEO stay at 95.
 - WCAG 2.2 AA: semantic landmarks, keyboard complete, visible focus, reduced motion, 200% zoom, 320px reflow.
 - Core Web Vitals targets: LCP under 1.5s, INP under 100ms, CLS under 0.05.
 - Playwright + axe run on every page in desktop and mobile Chromium.
