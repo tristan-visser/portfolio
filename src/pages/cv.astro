@@ -1,13 +1,13 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { site, skills, socialLinks } from '@/config';
-import { getFeaturedProjects, projectPath } from '@/lib/projects';
+import CvSheet from '@/components/CvSheet.astro';
+import { getFeaturedProjects } from '@/lib/projects';
 import { absoluteUrl, pageTitle, personSchema } from '@/lib/seo';
 
-const projects = await getFeaturedProjects(3);
-const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric' }).format(
-  new Date(),
-);
+const allProjects = await getFeaturedProjects(4);
+const projects = allProjects
+  .filter((project) => project.id !== 'electrum-dependency-engine')
+  .slice(0, 3);
 ---
 
 <BaseLayout
@@ -39,174 +39,14 @@ const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric
       </div>
     </div>
 
-    <article class="cv mx-auto max-w-[820px]">
-      <header class="border-ink border-b-2 pb-5">
-        <h1 class="font-serif text-5xl leading-none tracking-tight">Tristan Visser</h1>
-        <p class="text-muted mt-2 font-mono text-label uppercase">
-          Final-year BSc Computer Science student · Backend and full-stack developer
-        </p>
-        <div class="text-muted mt-4 flex flex-wrap gap-x-4 gap-y-1 text-small">
-          <span>{site.location}</span>
-          <a class="link-inline" href={`mailto:${site.email}`}>
-            {site.email}
-          </a>
-          <a class="link-inline" href={site.socials.github} target="_blank" rel="me noopener">
-            github.com/tristan-visser
-          </a>
-          <a class="link-inline" href={site.socials.linkedin} target="_blank" rel="me noopener">
-            linkedin.com/in/tristan-visser
-          </a>
-          <span>tristanvisser.co.za</span>
-        </div>
-      </header>
+    <CvSheet {projects} />
 
-      <section class="cv-section mt-8">
-        <h2 class="label">Profile</h2>
-        <p class="text-ink-soft mt-3 text-small leading-relaxed">
-          Final-year Computer Science student at Stellenbosch University with a strong foundation in
-          backend architectures, relational database design, REST APIs and Agile workflows. I've
-          built a graph-based dependency engine with Electrum engineers, a full-stack hackathon
-          platform, a reliable UDP file-transfer protocol, and database-backed web applications for
-          commercial clients. Looking for a graduate software engineering role from 2027.
-        </p>
-      </section>
-
-      <section class="cv-section mt-8">
-        <h2 class="label">Education</h2>
-        <div class="border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
-          <p class="text-muted font-mono text-[11px]">2023 — 2026</p>
-          <div>
-            <p class="font-medium">BSc Computer Science</p>
-            <p class="text-muted text-small">Stellenbosch University</p>
-            <p class="text-muted mt-1 text-small">
-              Focus: backend architectures, relational databases, REST APIs, software engineering.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="cv-section mt-8">
-        <h2 class="label">Experience</h2>
-        <div class="border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
-          <p class="text-muted font-mono text-[11px]">Freelance</p>
-          <div>
-            <p class="font-medium">Commercial Web Developer &amp; Technical Consultant</p>
-            <p class="text-muted text-small">Local business clients</p>
-            <ul class="text-muted mt-1 list-disc space-y-1 pl-4 text-small">
-              <li>
-                Designed, developed and deployed custom web applications backed by relational
-                databases and secure hosting.
-              </li>
-              <li>
-                Managed requirements, domain and DNS configuration, responsive UI and ongoing
-                maintenance.
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
-          <p class="text-muted font-mono text-[11px]">2026</p>
-          <div>
-            <p class="font-medium">Dependency Analysis Framework</p>
-            <p class="text-muted text-small">Electrum · industry project</p>
-            <p class="text-muted mt-1 text-small leading-relaxed">
-              Built a Java dependency graph engine that identifies breaking API changes and opens
-              automated GitHub pull requests for affected repositories, across three Agile sprints.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="cv-section mt-8">
-        <h2 class="label">Selected projects</h2>
-        {projects.map((project) => (
-          <div class="border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
-            <p class="text-muted font-mono text-[11px]">{project.data.year}</p>
-            <div>
-              <p class="font-medium">{project.data.title}</p>
-              <p class="text-muted mt-1 text-small leading-relaxed">{project.data.summary}</p>
-              <p class="text-muted mt-1 font-mono text-[10px] uppercase">
-                {project.data.stack.join(' · ')}
-              </p>
-              <a class="link-inline mt-1 inline-block text-[11px]" href={projectPath(project)}>
-                Case study
-              </a>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      <section class="cv-section mt-8">
-        <h2 class="label">Skills</h2>
-        <dl class="border-rule mt-3 border-t">
-          {skills.map((group) => (
-            <div class="border-rule grid gap-2 border-b py-3 sm:grid-cols-[120px_1fr]">
-              <dt class="text-muted font-mono text-[11px] uppercase">{group.label}</dt>
-              <dd class="text-small">{group.items.join(' · ')}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
-      <section class="cv-section mt-8">
-        <h2 class="label">Elsewhere</h2>
-        <div class="border-rule mt-3 flex flex-wrap gap-x-5 gap-y-2 border-t pt-3 text-small">
-          {socialLinks.map((link) => (
-            <a
-              class="link-inline"
-              href={link.href}
-              target={link.icon === 'mail' ? undefined : '_blank'}
-              rel={link.icon === 'mail' ? undefined : 'me noopener'}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <p class="text-muted mt-10 font-mono text-[10px] tracking-[0.06em] uppercase">
-        Last updated: {updated} · References available on request.
-      </p>
-    </article>
+    <p class="text-muted mt-6 text-center font-mono text-[10px] tracking-[0.06em] uppercase print:hidden">
+      The download is a one-page A4 PDF. Use “Print / Save as PDF” for a paper copy.
+    </p>
   </div>
 
   <script>
     document.querySelector('[data-print-cv]')?.addEventListener('click', () => window.print());
   </script>
-  <style is:global>
-    @media print {
-      @page {
-        margin: 16mm;
-      }
-
-      html,
-      body {
-        background: #fff !important;
-        color: #000 !important;
-        font-size: 11pt;
-      }
-
-      main {
-        padding: 0 !important;
-      }
-
-      .page-width {
-        width: 100% !important;
-        margin: 0 !important;
-      }
-
-      .cv {
-        max-width: none !important;
-      }
-
-      .cv-section {
-        break-inside: avoid;
-      }
-
-      a {
-        color: #000 !important;
-        text-decoration: none !important;
-      }
-    }
-  </style>
 </BaseLayout>

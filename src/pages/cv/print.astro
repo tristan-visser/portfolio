@@ -1,0 +1,21 @@
+---
+import CvSheet from '@/components/CvSheet.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getFeaturedProjects } from '@/lib/projects';
+import { absoluteUrl, pageTitle } from '@/lib/seo';
+
+const allProjects = await getFeaturedProjects(4);
+const projects = allProjects
+  .filter((project) => project.id !== 'electrum-dependency-engine')
+  .slice(0, 3);
+---
+
+<BaseLayout
+  title={pageTitle('CV')}
+  description="Print-ready CV for Tristan Visser."
+  canonical={absoluteUrl('/cv/')}
+  noindex
+  bare
+>
+  <CvSheet {projects} variant="print" />
+</BaseLayout>

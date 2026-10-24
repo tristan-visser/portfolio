@@ -1,6 +1,7 @@
 ---
 title: Parallel Othello MCTS
 summary: A distributed Monte Carlo Tree Search Othello player in C and MPI, reaching 1.3 million simulations per second at eight processes.
+cvSummary: Distributed MCTS Othello player in C/MPI, reaching 1.3M simulations/sec at 8 processes.
 role: Coursework project
 timeline: Coursework
 year: 2026

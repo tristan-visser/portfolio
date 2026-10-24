@@ -11,7 +11,12 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: 'compile',
   }),
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/cv/print/'),
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -1,6 +1,7 @@
 ---
 title: P2P File Sharing & RBUDP
 summary: A peer-to-peer file-sharing application with hybrid RSA/AES encryption, and a custom reliable UDP protocol benchmarked against TCP.
+cvSummary: Encrypted P2P file sharing with a custom reliable UDP protocol, benchmarked against TCP.
 role: RBUDP, GUI and experiments · team of four
 team: Team of four
 timeline: Coursework

@@ -1,0 +1,158 @@
+---
+import '@fontsource/source-sans-3/latin-400.css';
+import '@fontsource/source-sans-3/latin-500.css';
+import '@fontsource/source-sans-3/latin-600.css';
+import '@/styles/cv-print.css';
+import { site, skills, socialLinks } from '@/config';
+import { cv } from '@/data/cv';
+import { projectPath, type Project } from '@/lib/projects';
+import { absoluteUrl } from '@/lib/seo';
+
+interface Props {
+  projects: Project[];
+  variant?: 'web' | 'print';
+}
+
+const { projects, variant = 'web' } = Astro.props;
+const displayedSkills = skills.filter((group) => group.label !== 'Ways of working');
+const updated = new Intl.DateTimeFormat('en-ZA', { month: 'long', year: 'numeric' }).format(
+  new Date(),
+);
+---
+
+<article class:list={['cv mx-auto max-w-[820px]', variant === 'print' && 'cv--print']}>
+  <header class="cv-header border-ink border-b-2 pb-5">
+    <h1 class="font-serif text-5xl leading-none tracking-tight">Tristan Visser</h1>
+    <p class="cv-subtitle text-muted mt-2 font-mono text-label uppercase">
+      Final-year BSc Computer Science student · Backend and full-stack developer
+    </p>
+    <div class="cv-contact text-muted mt-4 flex flex-wrap gap-x-4 gap-y-1 text-small">
+      <span>{site.location}</span>
+      <a class="link-inline" href={`mailto:${site.email}`}>
+        {site.email}
+      </a>
+      <a class="link-inline" href={site.socials.github} target="_blank" rel="me noopener">
+        github.com/tristan-visser
+      </a>
+      <a class="link-inline" href={site.socials.linkedin} target="_blank" rel="me noopener">
+        linkedin.com/in/tristan-visser
+      </a>
+    </div>
+  </header>
+
+  <section class="cv-section mt-8">
+    <h2 class="cv-label label">Summary</h2>
+    <p class="text-ink-soft mt-3 text-small leading-relaxed">{cv.profile}</p>
+  </section>
+
+  <section class="cv-section mt-8">
+    <h2 class="cv-label label">Education</h2>
+    {cv.education.map((item) => (
+      <div class="cv-entry border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
+        <p class="cv-date text-muted font-mono text-[11px]">{item.date}</p>
+        <div>
+          <p class="font-medium">{item.title}</p>
+          <p class="text-muted text-small">{item.org}</p>
+          <p class="text-muted mt-1 text-small">{item.detail}</p>
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section class="cv-section mt-8">
+    <h2 class="cv-label label">Experience</h2>
+    {cv.experience.map((item) => (
+      <div class="cv-entry border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
+        <p class="cv-date text-muted font-mono text-[11px]">{item.date}</p>
+        <div>
+          <p class="font-medium">{item.title}</p>
+          <p class="text-muted text-small">{item.org}</p>
+          {'bullets' in item ? (
+            <ul class="text-muted mt-1 list-disc space-y-1 pl-4 text-small">
+              {item.bullets.map((bullet) => (
+                <li>{bullet}</li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-muted mt-1 text-small leading-relaxed">{item.description}</p>
+          )}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section class="cv-section mt-8">
+    <h2 class="cv-label label">Projects</h2>
+    {projects.map((project) => (
+      <div class="cv-entry border-rule mt-3 grid gap-2 border-t pt-3 sm:grid-cols-[120px_1fr]">
+        <p class="cv-date text-muted font-mono text-[11px]">{project.data.year}</p>
+        <div>
+          <p class="font-medium">
+            <a class="cv-project-link" href={absoluteUrl(projectPath(project))}>
+              {project.data.title}
+            </a>
+          </p>
+          <p class="text-muted mt-1 text-small leading-relaxed">
+            {project.data.cvSummary ?? project.data.summary}
+          </p>
+          <p class="cv-stack text-muted mt-1 font-mono text-[10px] uppercase">
+            {project.data.stack.join(' · ')}
+          </p>
+          {variant === 'web' && (
+            <a
+              class="link-inline cv-case-study mt-1 inline-block text-[11px]"
+              href={projectPath(project)}
+            >
+              Case study
+            </a>
+          )}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <section class="cv-section mt-8">
+    <h2 class="cv-label label">Skills</h2>
+    <dl class="border-rule mt-3 border-t">
+      {displayedSkills.map((group) => (
+        <div class="cv-entry border-rule grid gap-2 border-b py-3 sm:grid-cols-[120px_1fr]">
+          <dt class="cv-date text-muted font-mono text-[11px] uppercase">{group.label}</dt>
+          <dd class="text-small">{group.items.join(' · ')}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  {variant === 'web' && (
+    <section class="cv-section cv-web-only mt-8">
+      <h2 class="cv-label label">Elsewhere</h2>
+      <div class="border-rule mt-3 flex flex-wrap gap-x-5 gap-y-2 border-t pt-3 text-small">
+        {socialLinks.map((link) => (
+          <a
+            class="link-inline"
+            href={link.href}
+            target={link.icon === 'mail' ? undefined : '_blank'}
+            rel={link.icon === 'mail' ? undefined : 'me noopener'}
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <p
+    class:list={[
+      'cv-print-footer text-muted font-mono text-[10px] tracking-[0.06em] uppercase',
+      variant === 'web' && 'hidden print:block',
+    ]}
+  >
+    Portfolio &amp; case studies: <a href={site.url}>tristanvisser.co.za</a>
+  </p>
+
+  {variant === 'web' && (
+    <p class="cv-footnote cv-web-only text-muted mt-10 font-mono text-[10px] tracking-[0.06em] uppercase">
+      Last updated: {updated}
+    </p>
+  )}
+</article>

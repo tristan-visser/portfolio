@@ -10,6 +10,7 @@ const projects = defineCollection({
     z.object({
       title: z.string().min(1).max(80),
       summary: z.string().min(1).max(240),
+      cvSummary: z.string().min(1).max(200).optional(),
       role: z.string().min(1).max(120),
       timeline: z.string().min(1).max(80),
       team: z.string().max(120).optional(),

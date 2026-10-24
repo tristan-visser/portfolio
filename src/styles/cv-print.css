@@ -1,0 +1,241 @@
+/*
+ * CV print sheet.
+ *
+ * The PDF is generated from /cv/print/ with Playwright using the print media.
+ * Static Source Sans 3 weights are imported in CvSheet.astro so Chromium
+ * embeds real 400/500/600 faces instead of the variable font's thinnest
+ * default instance.
+ */
+
+.cv {
+  --cv-ink: #111;
+  --cv-muted: #3f3f3f;
+  --cv-rule: rgb(17 17 17 / 22%);
+}
+
+.cv-project-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cv-project-link:hover {
+  color: var(--color-accent-dark);
+}
+
+.cv--print {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 14mm 16mm;
+  background: #fff;
+  color: var(--cv-ink);
+  font-family: 'Source Sans 3', Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.38;
+  font-synthesis: none;
+  box-sizing: border-box;
+}
+
+@media screen {
+  .print-sheet-body {
+    padding: 24px 16px;
+    background: #e9e3d7;
+  }
+
+  .cv--print {
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 12%),
+      0 24px 60px rgb(0 0 0 / 12%);
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .print-sheet-body {
+    padding: 0;
+  }
+
+  .cv--print {
+    width: 100%;
+    min-height: 0;
+    padding: 24px 20px;
+    box-shadow: none;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm 16mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: var(--cv-ink) !important;
+  }
+
+  body {
+    font-size: 10.5pt;
+  }
+
+  .print-sheet-body {
+    padding: 0 !important;
+    background: #fff !important;
+  }
+
+  .page-width {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  .cv {
+    width: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    color: var(--cv-ink) !important;
+    font-family: 'Source Sans 3', Arial, sans-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.38 !important;
+    font-synthesis: none;
+    text-wrap: pretty;
+    orphans: 3;
+    widows: 3;
+    hyphens: manual;
+  }
+
+  .cv h1 {
+    margin: 0;
+    font-size: 28pt;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .cv h2,
+  .cv .label {
+    margin: 0;
+    font-size: 8.5pt;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .cv p,
+  .cv li,
+  .cv dd {
+    margin-top: 0;
+    font-size: 10pt;
+    line-height: 1.38 !important;
+  }
+
+  .cv .cv-subtitle {
+    margin-top: 1.8mm;
+    font-size: 8.6pt;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+  }
+
+  .cv .cv-contact {
+    margin-top: 2mm;
+    gap: 1.2mm 3.5mm;
+    font-size: 8.4pt;
+    line-height: 1.3;
+  }
+
+  .cv .cv-date {
+    font-size: 8.5pt;
+    line-height: 1.3;
+  }
+
+  .cv .cv-stack {
+    margin-top: 1mm;
+    font-size: 7.8pt;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  .cv .cv-print-footer,
+  .cv .cv-footnote {
+    font-size: 7.8pt;
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+  }
+
+  .cv .cv-header {
+    padding-bottom: 3mm;
+  }
+
+  .cv-header {
+    border-color: var(--cv-ink) !important;
+  }
+
+  .cv-section {
+    margin-top: 4.5mm !important;
+    break-inside: auto;
+  }
+
+  .cv-section:first-of-type {
+    margin-top: 3.5mm !important;
+  }
+
+  .cv-entry {
+    margin-top: 1.9mm !important;
+    padding-top: 1.7mm !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .cv .border-rule {
+    border-color: var(--cv-rule) !important;
+  }
+
+  .cv a {
+    color: var(--cv-ink) !important;
+    text-decoration: none !important;
+  }
+
+  .cv .text-muted,
+  .cv .text-ink-soft {
+    color: var(--cv-muted) !important;
+  }
+
+  .cv .cv-case-study,
+  .cv .cv-web-only {
+    display: none !important;
+  }
+
+  .cv .cv-print-footer {
+    margin-top: 4mm !important;
+  }
+
+  .cv .cv-footnote {
+    margin-top: 3.5mm !important;
+  }
+
+  .cv ul {
+    margin-top: 1mm !important;
+    padding-left: 4mm !important;
+  }
+
+  .cv li + li {
+    margin-top: 0.8mm !important;
+  }
+
+  .cv dl {
+    margin-top: 2.2mm !important;
+  }
+
+  .cv dt,
+  .cv dd {
+    margin: 0;
+  }
+}

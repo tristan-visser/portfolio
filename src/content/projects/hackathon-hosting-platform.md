@@ -1,6 +1,7 @@
 ---
 title: Hackathon Hosting Platform
 summary: A full-stack hackathon platform with accounts, groups and teams, a collaborative editor, sandboxed Python evaluation and live leaderboards.
+cvSummary: Hackathon platform with teams, collaborative editing and sandboxed Python judging.
 role: Full-stack developer · team of four
 team: Team of four
 timeline: Coursework
