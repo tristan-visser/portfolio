@@ -1,6 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "tristanvisser",
+  "workers_dev": false,
   "compatibility_date": "2026-10-19",
   "compatibility_flags": ["nodejs_compat"],
   "observability": {
@@ -19,6 +20,6 @@
   "vars": {
     "CONTACT_TO": "contact@tristanvisser.co.za",
     "CONTACT_FROM": "website@tristanvisser.co.za",
-    "ALLOWED_ORIGIN": "https://tristanvisser.co.za,http://localhost:4322,https://tristanvisser.tristanvisser.workers.dev",
+    "ALLOWED_ORIGIN": "https://tristanvisser.co.za,https://www.tristanvisser.co.za",
   },
 }

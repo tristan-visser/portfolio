@@ -29,24 +29,13 @@ const projects = allProjects
         >
           Download PDF
         </a>
-        <button
-          type="button"
-          data-print-cv
-          class="border-ink hover:bg-ink hover:text-paper inline-flex min-h-11 items-center gap-2 border px-4 font-mono text-label uppercase transition-colors"
-        >
-          Print / Save as PDF
-        </button>
       </div>
     </div>
 
     <CvSheet {projects} />
 
     <p class="text-muted mt-6 text-center font-mono text-[10px] tracking-[0.06em] uppercase print:hidden">
-      The download is a one-page A4 PDF. Use “Print / Save as PDF” for a paper copy.
+      A one-page A4 PDF, ready to attach to an application.
     </p>
   </div>
-
-  <script>
-    document.querySelector('[data-print-cv]')?.addEventListener('click', () => window.print());
-  </script>
 </BaseLayout>
