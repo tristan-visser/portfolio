@@ -8,3 +8,10 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+declare namespace Cloudflare {
+  interface Env {
+    /** Set with `wrangler secret put TURNSTILE_SECRET_KEY`. */
+    TURNSTILE_SECRET_KEY: string;
+  }
+}
