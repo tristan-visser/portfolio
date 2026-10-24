@@ -6,7 +6,7 @@ import SectionLabel from '@/components/SectionLabel.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site } from '@/config';
 import { getPublishedProjects } from '@/lib/projects';
-import { absoluteUrl, breadcrumbSchema, pageTitle, personSchema, websiteSchema } from '@/lib/seo';
+import { absoluteUrl, breadcrumbSchema, personSchema, websiteSchema } from '@/lib/seo';
 
 const projects = await getPublishedProjects();
 const featured = projects.filter((project) => project.data.featured);
@@ -15,13 +15,16 @@ const more = projects.filter((project) => !project.data.featured);
 const schema = [
   personSchema(),
   websiteSchema(),
-  breadcrumbSchema([{ name: 'Work', href: '/work/' }]),
+  breadcrumbSchema([
+    { name: 'Home', href: '/' },
+    { name: 'Work', href: '/work/' },
+  ]),
 ];
 ---
 
 <BaseLayout
-  title={pageTitle('Work')}
-  description="Selected software projects by Tristan Visser, with the problem, the decisions and the trade-offs behind each one."
+  title="Software Projects · Tristan Visser"
+  description="Selected software projects by Tristan Visser, with the problem, decisions and trade-offs behind each full-stack, backend and systems project."
   canonical={absoluteUrl('/work/')}
   {schema}
 >

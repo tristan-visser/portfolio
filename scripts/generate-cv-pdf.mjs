@@ -30,9 +30,9 @@ const pdfBuffer = await page.pdf({
 await browser.close();
 
 const pdf = await PDFDocument.load(pdfBuffer);
-pdf.setTitle('Tristan Visser — CV');
+pdf.setTitle('Tristan Visser · CV');
 pdf.setAuthor('Tristan Visser');
-pdf.setSubject('Curriculum vitae — final-year BSc Computer Science student');
+pdf.setSubject('Curriculum vitae for a final-year BSc Computer Science student');
 pdf.setKeywords([
   'Tristan Visser',
   'CV',

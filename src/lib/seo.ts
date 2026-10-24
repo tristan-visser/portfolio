@@ -26,7 +26,8 @@ export function personSchema(): JsonLd {
     '@id': `${site.url}/#person`,
     name: site.name,
     url: site.url,
-    email: `mailto:${site.email}`,
+    email: site.email,
+    image: absoluteUrl('/og.png'),
     jobTitle: 'Computer Science student',
     description: site.description,
     knowsAbout: [
@@ -44,9 +45,16 @@ export function personSchema(): JsonLd {
       'Prisma',
       'Cloudflare',
     ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Stellenbosch',
+      addressRegion: 'Western Cape',
+      addressCountry: 'ZA',
+    },
     alumniOf: {
       '@type': 'CollegeOrUniversity',
       name: site.university,
+      url: 'https://www.sun.ac.za/',
     },
     sameAs: socialLinks.filter((link) => link.icon !== 'mail').map((link) => link.href),
   };

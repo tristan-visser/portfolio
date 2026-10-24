@@ -1,8 +1,8 @@
 export const site = {
   name: 'Tristan Visser',
-  title: 'Tristan Visser — Computer Science graduate',
+  title: 'Tristan Visser · Computer Science Graduate',
   description:
-    'Final-year BSc Computer Science student at Stellenbosch University. I build backend systems, relational databases and full-stack web applications. Open to graduate software engineering roles from January 2027.',
+    'Final-year computer science student at Stellenbosch University building full-stack products and backend systems. Available for graduate roles from January 2027.',
   url: 'https://tristanvisser.co.za',
   repoUrl: 'https://github.com/tristan-visser/portfolio',
   locale: 'en-ZA',

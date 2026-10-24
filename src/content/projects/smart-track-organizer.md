@@ -15,7 +15,7 @@ order: 6
 cover:
   src: ./images/smart-track-ui.png
   alt: Smart Track Organizer Pro dashboard showing categorised tracks, live preview rows and studio colour labels.
-  caption: Smart Track Organizer Pro — the live preview and category dashboard inside REAPER.
+  caption: Smart Track Organizer Pro, showing the live preview and category dashboard inside REAPER.
 ---
 
 ## The problem

@@ -16,7 +16,7 @@ order: 8
 cover:
   src: ./images/wistl-pipeline.svg
   alt: WISTL compiler pipeline from source through scanner, LL(1) parser, symbol table and type checker, JVM code generation, to a class file.
-  caption: The compiler pipeline — scanner, LL(1) parser, type checker and JVM code generation.
+  caption: The compiler pipeline, from scanner and LL(1) parser to type checking and JVM code generation.
 ---
 
 ## The problem

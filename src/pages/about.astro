@@ -5,14 +5,14 @@ import PageHeader from '@/components/PageHeader.astro';
 import SectionLabel from '@/components/SectionLabel.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { site, skills } from '@/config';
-import { absoluteUrl, pageTitle, personSchema, profilePageSchema, websiteSchema } from '@/lib/seo';
+import { absoluteUrl, personSchema, profilePageSchema, websiteSchema } from '@/lib/seo';
 
 const schema = [personSchema(), websiteSchema(), profilePageSchema()];
 ---
 
 <BaseLayout
-  title={pageTitle('About')}
-  description="About Tristan Visser, a final-year BSc Computer Science student at Stellenbosch University, and how he approaches software engineering."
+  title="About Tristan Visser · Computer Science Student"
+  description="About Tristan Visser, a final-year BSc Computer Science student at Stellenbosch University, and how he approaches full-stack software engineering."
   canonical={absoluteUrl('/about/')}
   {schema}
 >
@@ -53,7 +53,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
         </div>
 
         <div class="mt-10">
-          <SectionLabel label="How I work" />
+          <SectionLabel as="h2" label="How I work" />
           <div class="border-rule mt-4 grid gap-0 border-t sm:grid-cols-3">
             <div class="border-rule border-b py-5 sm:border-r sm:border-b-0 sm:pr-5">
               <p class="font-serif text-xl">Understand the problem first.</p>
@@ -93,7 +93,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
               <br />
               {site.university}
               <br />
-              2023 — {site.graduation}
+              2023–{site.graduation}
             </p>
           </div>
           <div class="border-rule border-b py-4">
@@ -127,7 +127,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
   <section class="border-rule border-y py-section">
     <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
       <div>
-        <SectionLabel index="02" label="Experience" />
+        <SectionLabel as="h2" index="02" label="Experience" />
         <p class="text-muted mt-4 max-w-[34ch] text-small leading-relaxed">
           Client work, industry projects and the parts of the job that are not in the syllabus.
         </p>
@@ -139,7 +139,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
               <p class="font-medium">Commercial Web Developer &amp; Technical Consultant</p>
               <p class="text-muted text-small">Freelance · local business clients</p>
             </div>
-            <p class="text-muted font-mono text-[11px] uppercase">2025 — Present</p>
+            <p class="text-muted font-mono text-[11px] uppercase">2025–Present</p>
           </div>
           <ul class="text-ink-soft mt-3 max-w-[62ch] space-y-1.5 text-small leading-relaxed">
             <li>
@@ -178,7 +178,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
   <section class="border-rule bg-paper-deep/35 border-y py-section">
     <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
       <div>
-        <SectionLabel index="03" label="Skills" />
+        <SectionLabel as="h2" index="03" label="Skills" />
         <p class="text-muted mt-4 max-w-[34ch] text-small leading-relaxed">
           Tools I've used on real projects or coursework, not a list of everything I've installed
           once.
@@ -202,7 +202,7 @@ const schema = [personSchema(), websiteSchema(), profilePageSchema()];
   <section class="py-section">
     <div class="page-width grid gap-10 md:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] md:gap-16">
       <div>
-        <SectionLabel index="04" label="Now" />
+        <SectionLabel as="h2" index="04" label="Now" />
         <p class="text-muted mt-4 max-w-[30ch] text-small leading-relaxed">
           A snapshot, not a promise. Updated when things change.
         </p>

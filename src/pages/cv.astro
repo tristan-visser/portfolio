@@ -2,7 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import CvSheet from '@/components/CvSheet.astro';
 import { getFeaturedProjects } from '@/lib/projects';
-import { absoluteUrl, pageTitle, personSchema } from '@/lib/seo';
+import { absoluteUrl, personSchema } from '@/lib/seo';
 
 const allProjects = await getFeaturedProjects(4);
 const projects = allProjects
@@ -11,8 +11,8 @@ const projects = allProjects
 ---
 
 <BaseLayout
-  title={pageTitle('CV')}
-  description="Curriculum vitae for Tristan Visser, final-year BSc Computer Science student at Stellenbosch University."
+  title="CV · Tristan Visser, Computer Science Graduate"
+  description="One-page CV for Tristan Visser, a final-year BSc Computer Science student at Stellenbosch University with full-stack and backend experience."
   canonical={absoluteUrl('/cv/')}
   schema={[personSchema()]}
 >

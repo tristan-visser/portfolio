@@ -3,12 +3,13 @@ interface Props {
   index?: string;
   label: string;
   class?: string;
+  as?: 'p' | 'h2';
 }
 
-const { index, label, class: className = '' } = Astro.props;
+const { index, label, class: className = '', as: Tag = 'p' } = Astro.props;
 ---
 
-<p class:list={['label flex flex-wrap items-center gap-x-2 gap-y-1', className]}>
+<Tag class:list={['label flex flex-wrap items-center gap-x-2 gap-y-1', className]}>
   {index && <span class="text-accent">{index}</span>}
   {index && (
     <span aria-hidden="true" class="text-rule-strong">
@@ -16,4 +17,4 @@ const { index, label, class: className = '' } = Astro.props;
     </span>
   )}
   <span>{label}</span>
-</p>
+</Tag>

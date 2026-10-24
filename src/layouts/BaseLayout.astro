@@ -24,6 +24,8 @@ const { title, description, canonical, ogImage, noindex, schema, bare = false } 
 <!doctype html>
 <html lang={site.lang} dir="ltr">
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <Font cssVariable="--font-newsreader" preload={[{ weight: 400, style: 'normal' }]} />
     <Font cssVariable="--font-source-sans" preload={[{ weight: 400, style: 'normal' }]} />
     <BaseHead {title} {description} {canonical} {ogImage} {noindex} {schema} />

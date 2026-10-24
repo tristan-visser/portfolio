@@ -18,7 +18,7 @@ featured: true
 order: 3
 cover:
   src: ./images/p2p-demo.png
-  alt: Two P2P file-sharing windows side by side — Alice sharing a folder of files, and Bob downloading one file with progress and pause/resume controls.
+  alt: Two P2P file-sharing windows side by side, with Alice sharing a folder of files and Bob downloading one file with progress and pause/resume controls.
   caption: Alice shares a folder; Bob finds and downloads a file directly, with pause/resume progress.
 ---
 

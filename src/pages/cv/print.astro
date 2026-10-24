@@ -2,7 +2,7 @@
 import CvSheet from '@/components/CvSheet.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getFeaturedProjects } from '@/lib/projects';
-import { absoluteUrl, pageTitle } from '@/lib/seo';
+import { pageTitle } from '@/lib/seo';
 
 const allProjects = await getFeaturedProjects(4);
 const projects = allProjects
@@ -10,12 +10,6 @@ const projects = allProjects
   .slice(0, 3);
 ---
 
-<BaseLayout
-  title={pageTitle('CV')}
-  description="Print-ready CV for Tristan Visser."
-  canonical={absoluteUrl('/cv/')}
-  noindex
-  bare
->
+<BaseLayout title={pageTitle('CV')} description="Print-ready CV for Tristan Visser." noindex bare>
   <CvSheet {projects} variant="print" />
 </BaseLayout>

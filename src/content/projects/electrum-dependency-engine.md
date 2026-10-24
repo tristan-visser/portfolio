@@ -19,7 +19,7 @@ order: 1
 cover:
   src: ./images/pomegranate-analysis.png
   alt: Pomegranate analysis view showing a Maven dependency graph with red and green verdicts, evidence for a missing symbol, and an AI summary panel.
-  caption: Pomegranate's analysis view — blast radius, evidence and a per-artifact verdict.
+  caption: Pomegranate's analysis view, showing blast radius, evidence and a per-artifact verdict.
 ---
 
 ## The problem
