@@ -173,20 +173,11 @@ Deployment secrets are stored in GitHub Actions and Cloudflare. They are never c
 - `PUBLIC_TURNSTILE_SITE_KEY` in the build environment
 - `CONTACT_TO`, `CONTACT_FROM` and `ALLOWED_ORIGIN` in `wrangler.jsonc`
 
-## Repository scope
+## Documentation
 
-The public repository contains the source, content, public assets, tests, CI configuration and public documentation.
-
-Local-only files are intentionally ignored:
-
-- `.env.local`, `.dev.vars` and other environment files
-- build output, Wrangler state, Lighthouse reports and Playwright reports
-- generated Cloudflare types
-- local design explorations and working screenshots
-- the private content intake notes
-- the original CV PDF outside `public/`
-
-Design notes are in [`docs/design.md`](docs/design.md), and the architecture decisions are in [`docs/decisions.md`](docs/decisions.md). The social image source is in [`docs/design/og.html`](docs/design/og.html).
+- [Design system](docs/design.md)
+- [Architecture decisions](docs/decisions.md)
+- [OG image source](docs/design/og.html)
 
 ## Usage and rights
 
