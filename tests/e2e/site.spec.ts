@@ -5,7 +5,7 @@ test('home page has the expected content', async ({ page }) => {
 
   await expect(page).toHaveTitle(/Tristan Visser/);
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Tristan');
-  await expect(page.getByRole('main').getByText('Open to graduate roles · 2027')).toBeVisible();
+  await expect(page.getByRole('main').getByText(/Open to on-site, hybrid or remote/)).toBeVisible();
   await expect(page.getByRole('link', { name: /selected work/i }).first()).toBeVisible();
 });
 

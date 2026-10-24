@@ -1,6 +1,6 @@
 export const cv = {
   profile:
-    'Final-year Computer Science student at Stellenbosch University. Backend, database and full-stack experience with Electrum and commercial clients. Seeking a graduate software engineering role from 2027.',
+    'Final-year Computer Science student at Stellenbosch University. Backend, database and full-stack experience with Electrum and commercial clients. Seeking a graduate software engineering role from January 2027.',
   education: [
     {
       date: '2023 — 2026',
@@ -11,7 +11,7 @@ export const cv = {
   ],
   experience: [
     {
-      date: 'Ongoing',
+      date: '2025 — Present',
       title: 'Commercial Web Developer & Technical Consultant',
       org: 'Freelance · Local business clients',
       bullets: [

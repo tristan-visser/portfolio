@@ -48,6 +48,23 @@
   --font-sans: var(--font-source-sans);
 }
 
+/* Warm charcoal theme. The paper/ink variables invert; the footer and code
+   panels keep their own dark surfaces so they do not become bright blocks. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-paper: oklch(17.5% 0.012 70);
+  --color-paper-raised: oklch(21.5% 0.012 70);
+  --color-paper-deep: oklch(14.5% 0.01 70);
+  --color-ink: oklch(93% 0.012 85);
+  --color-ink-soft: oklch(82% 0.012 85);
+  --color-muted: oklch(68% 0.012 80);
+  --color-rule: oklch(93% 0.012 85 / 0.16);
+  --color-rule-strong: oklch(93% 0.012 85 / 0.32);
+  --color-accent: oklch(68% 0.14 32);
+  --color-accent-dark: oklch(76% 0.12 32);
+  --color-accent-soft: oklch(28% 0.05 32);
+}
+
 @layer base {
   html {
     color-scheme: light;
@@ -186,6 +203,11 @@
     @apply bg-ink text-paper overflow-x-auto p-5 font-mono text-sm leading-relaxed;
   }
 
+  :root[data-theme='dark'] .prose-case-study pre {
+    background: oklch(13% 0.01 70);
+    color: oklch(94% 0.012 85);
+  }
+
   .prose-case-study pre code {
     @apply bg-transparent p-0 text-inherit;
   }
@@ -227,6 +249,33 @@
       linear-gradient(to bottom, oklch(19% 0.008 80 / 0.045) 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: linear-gradient(to bottom, black 0%, transparent 70%);
+  }
+
+  :root[data-theme='dark'] .hero-grid-bg {
+    background-image:
+      linear-gradient(to right, oklch(93% 0.012 85 / 0.055) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(93% 0.012 85 / 0.055) 1px, transparent 1px);
+  }
+
+  :root[data-theme='dark'] .site-footer {
+    --color-ink: oklch(13% 0.01 70);
+    --color-paper: oklch(94% 0.012 85);
+  }
+
+  :root[data-theme='dark'] .logo-mark {
+    filter: invert(1);
+  }
+
+  .theme-icon-sun {
+    display: none;
+  }
+
+  :root[data-theme='dark'] .theme-icon-sun {
+    display: block;
+  }
+
+  :root[data-theme='dark'] .theme-icon-moon {
+    display: none;
   }
 
   .text-pretty {

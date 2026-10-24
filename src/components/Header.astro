@@ -14,47 +14,32 @@ function isActive(href: string): boolean {
 <header class="border-rule border-b print:hidden">
   <div class="page-width flex items-center justify-between gap-6 py-4">
     <a href="/" class="group flex items-center gap-3">
-      <Logo size={32} class="shrink-0" />
+      <Logo size={32} class="logo-mark shrink-0" />
       <span class="font-mono text-label uppercase">{site.name}</span>
     </a>
 
-    <nav class="hidden items-center gap-7 md:flex" aria-label="Primary">
-      {site.nav.map((item) => (
-        <a
-          href={item.href}
-          class:list={[
-            'font-mono text-label uppercase transition-colors duration-150 hover:text-accent-dark',
-            isActive(item.href) ? 'text-accent-dark' : 'text-muted',
-          ]}
-          aria-current={isActive(item.href) ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
-      <a
-        href="/cv/"
-        class="border-ink hover:bg-ink hover:text-paper inline-flex min-h-10 items-center gap-2 border px-3 font-mono text-label uppercase transition-colors duration-150"
+    <div class="flex items-center gap-3 md:gap-5">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Switch to dark mode"
+        class="border-rule text-muted hover:border-rule-strong hover:text-ink inline-flex size-10 shrink-0 items-center justify-center border transition-colors print:hidden"
       >
-        CV
-        <Icon name="arrow-up-right" size={13} />
-      </a>
-    </nav>
+        <span class="theme-icon-moon">
+          <Icon name="moon" size={16} />
+        </span>
+        <span class="theme-icon-sun">
+          <Icon name="sun" size={16} />
+        </span>
+      </button>
 
-    <details class="relative md:hidden">
-      <summary class="border-rule text-ink inline-flex min-h-10 cursor-pointer list-none items-center gap-2 border px-3 font-mono text-label uppercase [&::-webkit-details-marker]:hidden">
-        Menu
-        <Icon name="menu" size={15} />
-      </summary>
-      <nav
-        class="border-rule bg-paper absolute top-full right-0 z-50 mt-2 w-60 border p-2"
-        aria-label="Mobile"
-      >
+      <nav class="hidden items-center gap-7 md:flex" aria-label="Primary">
         {site.nav.map((item) => (
           <a
             href={item.href}
             class:list={[
-              'flex min-h-11 items-center px-3 font-mono text-label uppercase transition-colors hover:bg-paper-deep',
-              isActive(item.href) ? 'text-accent-dark' : 'text-ink',
+              'font-mono text-label uppercase transition-colors duration-150 hover:text-accent-dark',
+              isActive(item.href) ? 'text-accent-dark' : 'text-muted',
             ]}
             aria-current={isActive(item.href) ? 'page' : undefined}
           >
@@ -63,12 +48,84 @@ function isActive(href: string): boolean {
         ))}
         <a
           href="/cv/"
-          class="border-rule mt-2 flex min-h-11 items-center justify-between border-t px-3 pt-2 font-mono text-label uppercase"
+          class="border-ink hover:bg-ink hover:text-paper inline-flex min-h-10 items-center gap-2 border px-3 font-mono text-label uppercase transition-colors duration-150"
         >
           CV
           <Icon name="arrow-up-right" size={13} />
         </a>
       </nav>
-    </details>
+
+      <details class="relative md:hidden">
+        <summary class="border-rule text-ink inline-flex min-h-10 cursor-pointer list-none items-center gap-2 border px-3 font-mono text-label uppercase [&::-webkit-details-marker]:hidden">
+          Menu
+          <Icon name="menu" size={15} />
+        </summary>
+        <nav
+          class="border-rule bg-paper absolute top-full right-0 z-50 mt-2 w-60 border p-2"
+          aria-label="Mobile"
+        >
+          {site.nav.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'flex min-h-11 items-center px-3 font-mono text-label uppercase transition-colors hover:bg-paper-deep',
+                isActive(item.href) ? 'text-accent-dark' : 'text-ink',
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            href="/cv/"
+            class="border-rule mt-2 flex min-h-11 items-center justify-between border-t px-3 pt-2 font-mono text-label uppercase"
+          >
+            CV
+            <Icon name="arrow-up-right" size={13} />
+          </a>
+        </nav>
+      </details>
+    </div>
   </div>
 </header>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const getStored = (): string | null => {
+    try {
+      return localStorage.getItem('theme');
+    } catch {
+      return null;
+    }
+  };
+
+  const applyTheme = (theme: 'light' | 'dark', persist: boolean): void => {
+    root.dataset.theme = theme;
+    if (persist) {
+      try {
+        localStorage.setItem('theme', theme);
+      } catch {
+        // Storage can be unavailable; the theme still applies for this page.
+      }
+    }
+    toggle?.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+    );
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    if (meta) meta.content = theme === 'dark' ? '#171614' : '#f3eee5';
+  };
+
+  applyTheme(root.dataset.theme === 'dark' ? 'dark' : 'light', false);
+
+  toggle?.addEventListener('click', () => {
+    applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', true);
+  });
+
+  media.addEventListener('change', (event) => {
+    if (!getStored()) applyTheme(event.matches ? 'dark' : 'light', false);
+  });
+</script>

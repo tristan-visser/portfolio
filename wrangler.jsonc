@@ -18,7 +18,7 @@
     },
   ],
   "vars": {
-    "CONTACT_TO": "contact@tristanvisser.co.za",
+    "CONTACT_TO": "hello@tristanvisser.co.za",
     "CONTACT_FROM": "website@tristanvisser.co.za",
     "ALLOWED_ORIGIN": "https://tristanvisser.co.za,https://www.tristanvisser.co.za",
   },

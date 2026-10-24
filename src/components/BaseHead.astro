@@ -21,6 +21,7 @@ const {
 } = Astro.props;
 
 const shouldNoindex = noindex || import.meta.env.SITE_NOINDEX === 'true';
+const showAnalytics = Boolean(site.analyticsToken) && Astro.url.pathname !== '/cv/print/';
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : absoluteUrl(ogImage);
 ---
 
@@ -42,6 +43,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : absoluteUrl(ogImage);
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="sitemap" href="/sitemap-index.xml" />
 <meta name="theme-color" content="#f3eee5" />
+<meta name="color-scheme" content="light dark" />
 
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="en_ZA" />
@@ -62,5 +64,32 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : absoluteUrl(ogImage);
 {schema.map((item) => (
   <script type="application/ld+json" set:html={JSON.stringify(item)} />
 ))}
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    let stored = null;
+    try {
+      stored = localStorage.getItem('theme');
+    } catch {
+      // Storage can be unavailable; fall back to the system preference.
+    }
+    const dark = stored
+      ? stored === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'dark' : 'light';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', dark ? '#171614' : '#f3eee5');
+  })();
+</script>
+
+{showAnalytics && site.analyticsToken && (
+  <script
+    is:inline
+    type="module"
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={JSON.stringify({ token: site.analyticsToken })}
+  ></script>
+)}
 
 <slot />

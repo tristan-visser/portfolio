@@ -22,6 +22,15 @@
   color: var(--color-accent-dark);
 }
 
+.cv--print .text-muted,
+.cv--print .text-ink-soft {
+  color: var(--cv-muted);
+}
+
+.cv--print a {
+  color: var(--cv-ink);
+}
+
 .cv--print {
   width: 210mm;
   min-height: 297mm;
