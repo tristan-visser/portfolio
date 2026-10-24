@@ -1,143 +1,200 @@
-# tristanvisser.co.za
+# Tristan Visser · Portfolio
 
-Personal portfolio for **Tristan Visser**, a final-year BSc Computer Science student at Stellenbosch University. The site is built to be fast, accessible and easy to extend with real project case studies.
+[![CI](https://github.com/tristan-visser/portfolio/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/tristan-visser/portfolio/actions/workflows/ci.yml)
+[![Live site](https://img.shields.io/badge/live-tristanvisser.co.za-b4432a?style=flat-square)](https://tristanvisser.co.za)
+[![Astro 7](https://img.shields.io/badge/Astro-7-BC52EE?style=flat-square&logo=astro&logoColor=white)](https://astro.build)
+[![Cloudflare Workers](https://img.shields.io/badge/Cloudflare-Workers-F38020?style=flat-square&logo=cloudflare&logoColor=white)](https://workers.cloudflare.com)
 
-**Status:** working preview. Real case studies from coursework and industry work are in place; links, screenshots and final copy are still being added.
+Personal portfolio and project case studies for **Tristan Visser**, a final-year BSc Computer Science student at Stellenbosch University. The work focuses on full-stack products, backend systems and the decisions behind them.
+
+[Live site](https://tristanvisser.co.za) · [Case studies](https://tristanvisser.co.za/work/) · [CV](https://tristanvisser.co.za/cv/) · [Contact](mailto:hello@tristanvisser.co.za)
+
+![Tristan Visser portfolio preview](public/og.png)
+
+## What is in the site
+
+- Seven case studies covering the problem, decisions and trade-offs behind real projects.
+- A one-page A4 CV generated from the same content used by `/cv/`.
+- Light and warm charcoal dark themes, with system preference as the default and a persisted toggle.
+- A contact form protected by Cloudflare Turnstile and delivered through Cloudflare Email Service.
+- Canonical metadata, Open Graph images, JSON-LD, sitemap and accessible page structure.
+- GitHub Actions for formatting, linting, type checks, unit tests, Playwright/axe and Lighthouse.
 
 ## Stack
 
-- **Astro 7** with the official Cloudflare adapter
-- **TypeScript** in strict mode
-- **Tailwind CSS 4** with design tokens in `src/styles/global.css`
-- **Cloudflare Workers** with static assets
-- **Cloudflare Email Service + Turnstile** for the contact form
-- **GitHub Actions** for CI, accessibility/Lighthouse checks and deployment
+| Layer      | Choice                                                     |
+| ---------- | ---------------------------------------------------------- |
+| Framework  | Astro 7 with static output and one on-demand contact route |
+| Language   | TypeScript in strict mode                                  |
+| Styling    | Tailwind CSS 4 with a custom `@theme` token system         |
+| Runtime    | Cloudflare Workers with static assets                      |
+| Content    | Astro content collections validated with Zod               |
+| Contact    | Cloudflare Turnstile, Email Service and Email Routing      |
+| Analytics  | Cloudflare Web Analytics, without cookies                  |
+| Testing    | Vitest, Playwright, axe-core and Lighthouse CI             |
+| Deployment | GitHub Actions and Wrangler                                |
 
-The design direction and component rules are in [`docs/design.md`](docs/design.md). Architecture decisions are in [`docs/decisions.md`](docs/decisions.md).
+## Project structure
+
+```text
+.
+├── public/                  Static assets, security headers and the CV PDF
+├── scripts/
+│   ├── check-content.mjs    Fails production builds with placeholder content
+│   └── generate-cv-pdf.mjs  Prints /cv/print/ to the public CV PDF
+├── src/
+│   ├── components/          UI, logo, CV sheet and contact form
+│   ├── content/projects/    Markdown case studies and their images
+│   ├── data/cv.ts           Single source of truth for the CV
+│   ├── layouts/             Base layout and print sheet shell
+│   ├── lib/                 SEO, projects and contact helpers
+│   ├── pages/               Routes, including /api/contact
+│   └── styles/              Theme tokens, prose and CV print styles
+├── tests/
+│   ├── e2e/                 Playwright and axe checks
+│   └── unit/                Contact payload tests
+├── docs/                    Public design and architecture notes
+├── astro.config.mjs
+├── lighthouserc.cjs
+├── playwright.config.ts
+└── wrangler.jsonc
+```
 
 ## Local development
 
+Requirements:
+
+- Node.js 24 or newer
+- pnpm 12 or newer
+- `mise` is optional, but `.mise.toml` pins the local toolchain
+
 ```sh
-mise install
+mise install        # optional
 pnpm install
+pnpm cf:types       # generate Cloudflare binding types
 pnpm dev
 ```
 
-The dev server uses Cloudflare's `workerd` runtime through the Astro adapter. The site is available at the URL printed by Astro.
+The dev server runs at the URL printed by Astro. The contact page accepts both `localhost:4321` and `localhost:4322` in local development.
 
-### Contact form locally
+### Environment
 
-Copy the example environment file and fill in the Turnstile secret:
+The public Turnstile site key belongs in `.env.local`:
+
+```sh
+PUBLIC_TURNSTILE_SITE_KEY=your-site-key
+```
+
+The Worker runtime secret and allowed origin belong in `.dev.vars`:
 
 ```sh
 cp .dev.vars.example .dev.vars
 ```
 
-The public Turnstile site key belongs in `.env.local` as `PUBLIC_TURNSTILE_SITE_KEY`. The production secret is stored in Cloudflare with `wrangler secret put TURNSTILE_SECRET_KEY`; it is never committed.
+`TURNSTILE_SECRET_KEY` is stored as a Cloudflare Worker secret in production. `ALLOWED_ORIGIN` is configured in `wrangler.jsonc` for production and can be overridden locally.
 
-If the site key is missing, the contact page shows an email fallback instead of a broken form.
-
-## Content workflow
-
-1. Fill in `docs/content-intake.md` (local only, gitignored). It contains private details, so it is not committed.
-2. Update the project files in `src/content/projects/` with links, screenshots, dates and any details that are missing.
-3. Remove `placeholder: true` from any future placeholder project.
-4. Update `src/config.ts` with the final links, email and availability.
-5. Add screenshots to `src/assets/` and reference them from the project frontmatter.
-
-Project frontmatter is validated by Zod in `src/content.config.ts`. Required fields include `title`, `summary`, `role`, `timeline`, `year`, `stack`, and at least one of `liveUrl` or `repoUrl` when the project is ready.
-
-### Build guard
-
-```sh
-pnpm build          # fails if any project still has placeholder: true
-pnpm build:preview  # explicit preview build; allows placeholders
-```
-
-This is intentional. It is too easy to forget that demo content is still on a portfolio. The guard also warns about projects without a live or repository link.
+If the site key is missing, the contact page shows a plain email fallback instead of a broken form.
 
 ## Commands
 
-| Command              | What it does                                    |
-| -------------------- | ----------------------------------------------- |
-| `pnpm dev`           | Start the Astro dev server                      |
-| `pnpm build`         | Production build; blocks placeholder content    |
-| `pnpm build:preview` | Preview build; allows placeholder content       |
-| `pnpm build:staging` | Production build with `noindex` for the preview |
-| `pnpm preview`       | Preview the built Worker locally                |
-| `pnpm check`         | Astro and TypeScript checks                     |
-| `pnpm lint`          | ESLint                                          |
-| `pnpm format`        | Prettier write                                  |
-| `pnpm format:check`  | Prettier check                                  |
-| `pnpm test`          | Vitest unit tests                               |
-| `pnpm test:e2e`      | Playwright desktop and mobile tests             |
-| `pnpm lighthouse`    | Lighthouse CI against the local preview         |
-| `pnpm cv:pdf`        | Regenerate the public CV PDF from `/cv/`        |
-| `pnpm cf:types`      | Regenerate `worker-configuration.d.ts`          |
-| `pnpm deploy`        | Deploy the Worker with Wrangler                 |
+| Command              | What it does                                              |
+| -------------------- | --------------------------------------------------------- |
+| `pnpm dev`           | Start the Astro dev server                                |
+| `pnpm check`         | Generate Worker types and run Astro and TypeScript checks |
+| `pnpm lint`          | Run ESLint                                                |
+| `pnpm format`        | Format the repository with Prettier                       |
+| `pnpm format:check`  | Check formatting                                          |
+| `pnpm test`          | Run Vitest unit tests                                     |
+| `pnpm test:e2e`      | Run Playwright desktop, mobile and dark-mode tests        |
+| `pnpm lighthouse`    | Run Lighthouse CI against the local preview               |
+| `pnpm build`         | Generate types, validate content and build for production |
+| `pnpm build:preview` | Build with placeholder content allowed                    |
+| `pnpm preview`       | Preview the production build locally                      |
+| `pnpm cv:pdf`        | Regenerate `public/tristan-visser-cv.pdf`                 |
+| `pnpm cf:types`      | Regenerate `worker-configuration.d.ts`                    |
+| `pnpm deploy`        | Deploy the Worker manually with Wrangler                  |
 
-Rebuild and restart `pnpm preview` after changing the Worker or the headers. The CV PDF is generated from the running preview, so run `pnpm preview` before `pnpm cv:pdf`.
+`worker-configuration.d.ts` is generated and intentionally gitignored. `pnpm check` and `pnpm build` regenerate it automatically.
 
-## Cloudflare setup
+## Content workflow
 
-Already configured for the preview:
+Case studies live in `src/content/projects/*.md` and are validated by `src/content.config.ts`. Images live in `src/content/projects/images/`.
 
-- Worker `tristanvisser` on `https://tristanvisser.tristanvisser.workers.dev`
-- Turnstile widget for `tristanvisser.co.za`, `www`, `localhost` and the workers.dev preview
-- Email Routing for `hello@`, `contact@` and `website@tristanvisser.co.za`, forwarded to the verified Gmail destination
-- Email Sending enabled for `tristanvisser.co.za` with SPF, DKIM and DMARC
+A project starts with frontmatter like this:
 
-At launch:
-
-1. Connect `tristanvisser.co.za` as the Worker custom domain.
-2. Add a `www` redirect to the apex domain.
-3. Remove the workers.dev hostname from the Turnstile widget and `ALLOWED_ORIGIN`.
-4. Remove `http://localhost:4322` from `ALLOWED_ORIGIN`.
-5. Enable HSTS at the Cloudflare zone level (it is intentionally not in `_headers`, so local HTTP previews do not break).
-6. GitHub Actions already deploys on `main`. Optionally connect Workers Builds later and remove the GitHub deploy job.
-7. Add a `noindex` or Cloudflare Access rule for preview deployments.
-8. Enable DNSSEC and the free WAF managed ruleset.
-9. Add Cloudflare Web Analytics if wanted, then update the CSP and privacy notice.
-
-## Security notes
-
-- `.env.local` and `.dev.vars` are gitignored. No production secrets are committed.
-- The contact endpoint is same-origin only, validates the payload, uses a honeypot, verifies Turnstile server-side and never logs message content.
-- Security headers live in `public/_headers`: CSP, frame protection, nosniff, referrer policy, permissions policy and COOP.
-- `worker-configuration.d.ts` is generated by `wrangler types` and committed so CI can type-check without secrets.
-- The API token in `.env.local` is a broad setup token. It should be rotated after setup; CI does not use it. Deployment uses a separate scoped token stored in GitHub Actions secrets, limited to Workers Scripts and Workers Routes.
-
-## What still needs to happen
-
-- Add a live URL or repository URL for each of the eight case studies.
-- Add screenshots or diagrams for the remaining projects.
-- Confirm the project years and any outcomes that are not already on the CV.
-- The public CV PDF is generated from `/cv/` with `pnpm cv:pdf`; the original FlowCV PDF stays local because it contains a phone number.
-- Add a professional photo if wanted; the site works without one.
-- Connect the custom domain, set up Workers Builds, and remove the preview hostname from Turnstile/`ALLOWED_ORIGIN`.
-- Run the final cross-browser and real-device pass.
-
-## Quality bar
-
-- Lighthouse mobile: 95+ across performance, accessibility, best practices and SEO. The CI performance gate is 85 on shared runners to avoid flaky failures; accessibility, best practices and SEO stay at 95.
-- WCAG 2.2 AA: semantic landmarks, keyboard complete, visible focus, reduced motion, 200% zoom, 320px reflow.
-- Core Web Vitals targets: LCP under 1.5s, INP under 100ms, CLS under 0.05.
-- Playwright + axe run on every page in desktop and mobile Chromium.
-- Unit tests cover contact payload validation.
-- No fake projects, metrics, testimonials or screenshots.
-
-## Repository layout
-
+```yaml
+---
+title: Example project
+summary: A short summary used on the work index and in metadata.
+cvSummary: A shorter version used on the CV.
+role: Full-stack developer
+team: Team of four
+timeline: Coursework
+year: 2026
+stack: [Java, Spring Boot, PostgreSQL]
+status: completed
+featured: false
+order: 4
+cover:
+  src: ./images/example.png
+  alt: A concise description of the screenshot.
+  caption: The main view of the project.
+---
 ```
-src/
-  components/       Astro components
-  content/          Project case studies
-  layouts/          Base layout
-  lib/              SEO, content and contact helpers
-  pages/            Routes, including /api/contact
-  styles/           Tailwind theme and prose styles
-public/             Static assets and security headers
-scripts/            Content guard
-tests/              Unit and end-to-end tests
-docs/               Design and architecture notes
+
+Then write the case study with the problem, what was built, the hard part, key decisions, outcome and what you would do differently. Use `draft: true` to keep a project out of the published collection. `pnpm build` refuses to ship placeholder content.
+
+The CV is edited in `src/data/cv.ts`, not directly in the PDF. To regenerate the PDF:
+
+```sh
+pnpm preview --port 4322
+pnpm cv:pdf
 ```
+
+The print route at `/cv/print/` is noindex and uses a light A4 stylesheet. The public PDF is committed so the download is available without a build step.
+
+## Quality and deployment
+
+Push to `main` and GitHub Actions runs the quality job, then deploys the Worker. Pull requests run the same checks without deploying.
+
+The quality job covers:
+
+- formatting, linting and TypeScript checks
+- unit tests and Playwright tests across desktop, mobile and dark mode
+- axe accessibility checks on every public page
+- Lighthouse CI with performance, accessibility, best-practices and SEO gates
+
+The production site is served from the apex domain `tristanvisser.co.za`. `www` redirects to the apex, HTTP redirects to HTTPS and HSTS is enabled at the Cloudflare zone. The contact form is restricted to the production origin.
+
+Deployment secrets are stored in GitHub Actions and Cloudflare. They are never committed:
+
+- `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` in GitHub Actions
+- `TURNSTILE_SECRET_KEY` as a Worker secret
+- `PUBLIC_TURNSTILE_SITE_KEY` in the build environment
+- `CONTACT_TO`, `CONTACT_FROM` and `ALLOWED_ORIGIN` in `wrangler.jsonc`
+
+## Repository scope
+
+The public repository contains the source, content, public assets, tests, CI configuration and public documentation.
+
+Local-only files are intentionally ignored:
+
+- `.env.local`, `.dev.vars` and other environment files
+- build output, Wrangler state, Lighthouse reports and Playwright reports
+- generated Cloudflare types
+- local design explorations and working screenshots
+- the private content intake notes
+- the original CV PDF outside `public/`
+
+Design notes are in [`docs/design.md`](docs/design.md), and the architecture decisions are in [`docs/decisions.md`](docs/decisions.md). The social image source is in [`docs/design/og.html`](docs/design/og.html).
+
+## Usage and rights
+
+This is a personal portfolio, not a template. The source is public for review and reference. The written case studies, CV, project screenshots, personal images and brand assets are © Tristan Visser and may not be reused without permission.
+
+## Contact
+
+- Site: [tristanvisser.co.za](https://tristanvisser.co.za)
+- Email: [hello@tristanvisser.co.za](mailto:hello@tristanvisser.co.za)
+- LinkedIn: [linkedin.com/in/tristan-visser](https://www.linkedin.com/in/tristan-visser/)
+- GitHub: [github.com/tristan-visser](https://github.com/tristan-visser)

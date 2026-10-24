@@ -26,7 +26,7 @@
 
 ## ADR-004: Contact form through a Worker, Turnstile and Cloudflare Email Service
 
-**Decision:** `POST /api/contact/` validates the payload, checks a honeypot, verifies a Turnstile token, and sends a plain-text email through the `send_email` binding. The destination is `contact@tristanvisser.co.za`, forwarded to Gmail by Email Routing.
+**Decision:** `POST /api/contact/` validates the payload, checks a honeypot, verifies a Turnstile token, and sends a plain-text email through the `send_email` binding. The destination is `hello@tristanvisser.co.za`, forwarded to Gmail by Email Routing.
 
 **Why:** No third-party form service, no database, no message content stored on the server. Turnstile blocks bots without a puzzle in most cases. Email Routing and sending to a verified destination are free on the current plan.
 
@@ -64,17 +64,17 @@
 
 **Alternatives rejected:** Workers Builds (excellent, but needs a user-scoped token and dashboard connection), deploying from a laptop (easy to forget and not reproducible), a broad account token in GitHub secrets (unnecessary blast radius).
 
-## ADR-009: Light theme only for v1
+## ADR-009: Light and warm charcoal dark themes
 
-**Decision:** Ship one excellent warm light theme. Do not add a theme toggle yet.
+**Decision:** Ship both themes through the same semantic tokens. Follow the system preference by default, expose a header toggle, and persist the visitor's choice in local storage. Keep the print stylesheet light.
 
-**Why:** A toggle doubles the CSS and testing surface. Recruiters do not grade the toggle; they grade the work. The light theme also pairs better with screenshots. Semantic tokens make a dark theme possible later.
+**Why:** The two palettes use one set of tokens, so components do not fork. The system preference makes the first visit feel native, while the toggle keeps control with the visitor. Dark mode was tested with axe and Playwright before launch.
 
-**Alternatives rejected:** A half-tested dark mode, forcing dark mode on everyone.
+**Alternatives rejected:** A half-tested dark mode, forcing dark mode on everyone, a theme that ignores the system preference.
 
 ## ADR-010: Privacy-friendly analytics only
 
-**Decision:** Use Cloudflare Web Analytics if analytics is needed. No advertising cookies, no tracking pixels, no session recording.
+**Decision:** Use Cloudflare Web Analytics. No advertising cookies, no tracking pixels and no session recording. The beacon is loaded only on the production hostname.
 
 **Why:** It answers the only question that matters for a portfolio (are people visiting?) without a cookie banner or a privacy burden. The privacy notice explains it.
 

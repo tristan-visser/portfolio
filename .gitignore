@@ -15,7 +15,8 @@ dist/
 .dev.vars
 !.dev.vars.example
 
-# Generated Cloudflare/Astro types are committed so CI can type-check.
+# Generated Cloudflare types (regenerate with pnpm cf:types)
+worker-configuration.d.ts
 
 # Test output
 coverage/
@@ -30,14 +31,12 @@ blob-report/
 *.log
 
 # Local content intake (may contain private details)
-docs/content-intake.md
+docs/content-intake*.md
 
 # Local design samples and screenshots
 design-samples/
 screenshots/
 .lighthouseci/
-playwright-report/
-test-results/
 
 # Personal CV PDF (contains a phone number)
 tristan_visser_cv.pdf

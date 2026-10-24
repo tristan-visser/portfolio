@@ -93,7 +93,7 @@ No third custom font. The system mono is part of the platform, not a download.
 
 ## Component rules
 
-- **Header:** name and TV mark, four links, CV button. Non-sticky. Mobile uses a native `<details>` menu.
+- **Header:** name and T-root/V mark, theme toggle, primary links and CV button. Non-sticky. Mobile uses a native `<details>` menu.
 - **Footer:** dark ink band, contact CTA, email, social links, location, availability, privacy.
 - **Project row:** entire row is a link; title is a heading; status is visible text; stack and year are metadata; 44px minimum target.
 - **Case study:** title, summary, metadata sidebar, prose with decision logs and figures. No decorative hero if there is no real image.
@@ -118,10 +118,10 @@ WCAG 2.2 AA:
 - Initial JS: under 30 KB gzip (the current site has a single small JS bundle).
 - Fonts: two families, five files, under 120 KB total.
 - HTML: under 30 KB per page.
-- LCP: under 1.5s on a mid-range phone/4G target; Lighthouse mobile 95+.
-- CLS: under 0.05.
-- INP: under 100ms.
-- No third-party scripts except Turnstile on the contact page and optional Cloudflare Web Analytics.
+- LCP: under 2.5s on a mid-range phone/4G target; Lighthouse mobile 95+.
+- CLS: under 0.1.
+- INP: under 200ms.
+- Third-party scripts are limited to Turnstile on the contact page and Cloudflare Web Analytics.
 
 ## Anti-references
 
@@ -137,4 +137,4 @@ WCAG 2.2 AA:
 
 ## Theme
 
-Light only for v1. One excellent theme is better than two half-tested ones. A dark theme can be added later through semantic tokens, but it is not a launch requirement.
+The site ships a warm light theme and a warm charcoal dark theme. The system preference is the default, and a header toggle persists the visitor's choice in local storage. Print output remains light.

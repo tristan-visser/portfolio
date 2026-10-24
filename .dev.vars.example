@@ -1,3 +1,4 @@
 # Local-only values for `astro dev` / `wrangler dev`.
 # Copy this file to `.dev.vars` and fill in the real values.
 TURNSTILE_SECRET_KEY=replace-me
+ALLOWED_ORIGIN=http://localhost:4321,http://localhost:4322
