@@ -18,6 +18,7 @@ Personal portfolio and project case studies for **Tristan Visser**, a final-year
 - Light and warm charcoal dark themes, with system preference as the default and a persisted toggle.
 - A contact form protected by Cloudflare Turnstile and delivered through Cloudflare Email Service.
 - Canonical metadata, Open Graph images, JSON-LD, sitemap and accessible page structure.
+- A curated `llms.txt` index for AI agents and answer engines.
 - GitHub Actions for formatting, linting, type checks, unit tests, Playwright/axe and Lighthouse.
 
 ## Stack
@@ -38,7 +39,7 @@ Personal portfolio and project case studies for **Tristan Visser**, a final-year
 
 ```text
 .
-├── public/                  Static assets, security headers and the CV PDF
+├── public/                  Static assets, security headers, CV PDF and llms.txt
 ├── scripts/
 │   ├── check-content.mjs    Fails production builds with placeholder content
 │   └── generate-cv-pdf.mjs  Prints /cv/print/ to the public CV PDF
@@ -144,6 +145,8 @@ cover:
 
 Then write the case study with the problem, what was built, the hard part, key decisions, outcome and what you would do differently. Use `draft: true` to keep a project out of the published collection. `pnpm build` refuses to ship placeholder content.
 
+Update `public/llms.txt` when a case study is added or removed.
+
 The CV is edited in `src/data/cv.ts`, not directly in the PDF. To regenerate the PDF:
 
 ```sh
@@ -172,6 +175,10 @@ Deployment secrets are stored in GitHub Actions and Cloudflare. They are never c
 - `TURNSTILE_SECRET_KEY` as a Worker secret
 - `PUBLIC_TURNSTILE_SITE_KEY` in the build environment
 - `CONTACT_TO`, `CONTACT_FROM` and `ALLOWED_ORIGIN` in `wrangler.jsonc`
+
+## Answer engines
+
+`/llms.txt` is a curated, agent-readable index of the site and its case studies. It is optional, and Google Search does not use it; Google relies on normal crawl, index, schema and content signals. AI search crawlers and user-triggered fetchers are allowed by the wildcard in `robots.txt`.
 
 ## Documentation
 

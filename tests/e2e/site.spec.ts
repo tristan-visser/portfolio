@@ -51,6 +51,16 @@ test('contact form validates and reports success', async ({ page }) => {
   await expect(page.getByRole('status')).toContainText(/message has been sent/i);
 });
 
+test('llms.txt is available for AI agents', async ({ request }) => {
+  const response = await request.get('/llms.txt');
+
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toContain('text/plain');
+  const text = await response.text();
+  expect(text).toContain('Tristan Visser');
+  expect(text).toContain('/work/electrum-dependency-engine/');
+});
+
 test('unknown routes return the custom 404 page', async ({ page }) => {
   const response = await page.goto('/this-page-does-not-exist/');
 

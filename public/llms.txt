@@ -1,0 +1,38 @@
+# Tristan Visser
+
+> Personal portfolio and project case studies for Tristan Visser, a final-year BSc Computer Science student at Stellenbosch University. The site covers full-stack product work, backend systems and a one-page CV.
+
+- Site: https://tristanvisser.co.za
+- Contact: hello@tristanvisser.co.za
+- GitHub: https://github.com/tristan-visser
+- LinkedIn: https://www.linkedin.com/in/tristan-visser/
+- Location: Stellenbosch / Cape Town, South Africa
+- Education: BSc Computer Science, Stellenbosch University, 2023–2026
+- Availability: Graduate software engineering roles from January 2027. Open to on-site, hybrid or remote work in Cape Town / Stellenbosch.
+- CV: https://tristanvisser.co.za/cv/
+- Last updated: October 2026
+
+## Primary pages
+
+- [Home](https://tristanvisser.co.za/): Introduction, selected work and current availability.
+- [Work](https://tristanvisser.co.za/work/): Index of the project case studies.
+- [About](https://tristanvisser.co.za/about/): Background, experience, skills and working approach.
+- [Contact](https://tristanvisser.co.za/contact/): Contact form and public email address.
+- [CV](https://tristanvisser.co.za/cv/): One-page A4 CV and PDF download.
+
+## Case studies
+
+- [Electrum Dependency Analysis Framework](https://tristanvisser.co.za/work/electrum-dependency-engine/): Java and Spring Boot dependency graph engine for Maven breakage analysis and automated version-bump pull requests.
+- [Hackathon Hosting Platform](https://tristanvisser.co.za/work/hackathon-hosting-platform/): Full-stack platform with teams, a collaborative editor, sandboxed Python judging and live leaderboards.
+- [P2P File Sharing and RBUDP](https://tristanvisser.co.za/work/p2p-encrypted-file-sharing/): Encrypted peer-to-peer file sharing with a custom reliable UDP protocol benchmarked against TCP.
+- [Parallel Othello MCTS](https://tristanvisser.co.za/work/parallel-othello-mcts/): Distributed Monte Carlo Tree Search player in C and MPI, reaching 1.3 million simulations per second at eight processes.
+- [BPE DFA Tokenizer](https://tristanvisser.co.za/work/bpe-dfa-tokenizer/): BPE tokenization automata with differential tests, benchmarks and two theoretical extensions.
+- [Smart Track Organizer Pro](https://tristanvisser.co.za/work/smart-track-organizer/): REAPER session organizer with a studio lexicon, live preview and folder automation.
+- [WISTL Compiler](https://tristanvisser.co.za/work/wistl-compiler/): Compiler for a small LL(1) language, from scanner and parser to type checking and JVM class files.
+
+## Notes
+
+- The case studies describe work Tristan actually did, including the problem, decisions and trade-offs.
+- Source code is available on request where no public repository is linked.
+- The site does not publish invented metrics, testimonials or client claims.
+- The written case studies, CV, screenshots and brand assets are © Tristan Visser and may not be reused without permission.
